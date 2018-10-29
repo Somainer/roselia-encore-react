@@ -1,0 +1,54 @@
+.visible-xs {
+    display: none !important;
+}
+@media (max-width: 767px) {
+    .hidden-xs {
+      display: none !important;
+    }
+    .visible-xs {
+        display: block !important;
+    }
+}
+
+@keyframes blur-clear {
+    from { filter: blur(0px) saturate(100%); }
+    to { filter: blur(25px) saturate(120%); }
+}
+
+.part {
+    border-radius: 15px 15px 15px 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 11px 7px 15px rgba(0, 0, 0, .2);
+    padding: 25px 20px 5px 20px;
+    margin-bottom: 25px;
+    transition: box-shadow .25s, box-shadow .25s;
+}
+.part:hover {
+    transition: padding .25s;
+    transition: box-shadow .25s, box-shadow .25s;
+    border-radius: 15px 15px 15px 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 20px 20px 17px 0px rgba(0, 0, 0, .2);
+    margin-bottom: 25px;
+}
+
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+}
+
+.thumbnail > img,
+.thumbnail a > img {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.member {
+    margin-top: -30px;
+}
+
+.white-text {
+    color: #fff !important;
+}

@@ -1,0 +1,26 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+  "rules": {
+    "ordered-imports": false,
+    "curly": false,
+    "jsx-boolean-value": false,
+    "object-literal-sort-keys": false,
+    "comment-format": false,
+    "interface-name": false,
+    "array-type": false,
+    "no-unused-variable": [true, {"ignore-pattern": "^_"}],
+    "member-ordering": false,
+    "match-default-export-name": false,
+    "file-name-casing": false,
+    "jsx-self-close": false,
+    "only-arrow-functions": false,
+    "max-classes-per-file": false
+  }
+}
