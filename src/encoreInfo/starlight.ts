@@ -80,7 +80,14 @@ const members = Helper.makeMembers([
             en: "Iwata Haruki",
             cn: "岩田阳葵",
             jp: "岩田陽葵"
-        }
+        },
+        external: [
+            {
+                title: 'あれは',
+                content: ['あれは　闹钟マン，闹钟Man！', '露女士保护协会表示强烈谴责'],
+                hidden: true
+            }
+        ]
     },
     {
         name: {
@@ -269,29 +276,30 @@ const singles = Helper.makeTrackOf('single')([
 ])
 
 const siteConfig: Helper.SiteConfig = {
+    configName: "starlight",
     members,
     singles,
-    siteLogo: 'img/starlight/kirin.svg',
-    siteFavicon: 'img/starlight/kirin.svg',
+    siteLogo: '/img/starlight/kirin.svg',
+    siteFavicon: '/img/starlight/kirin.svg',
     logoSpin: true,
     themeColor: '#5869b1',
     playerUrl: '' && 'https://music.163.com/outchain/player?type=0&id=1999324469&auto=0&height=430',
     bannerImage: {
-        foreground: 'img/starlight/mainvisual.png',
-        background: 'img/starlight/Intro__bg.jpg'
+        foreground: '/img/starlight/mainvisual.png',
+        background: '/img/starlight/Intro__bg.jpg'
     },
     getters: {
         trackImageGetter (t) {
-            return `img/starlight/${Helper.capatialize(t.type!)}_${t.displayId || t.id}.jpg`
+            return `/img/starlight/${Helper.capatialize(t.type!)}_${t.displayId || t.id}.jpg`
         },
         limitedTrackImageGetter (t) {
-            return `img/${Helper.capatialize(t.type!)}_${t.id}_lim.jpg`
+            return `/img/${Helper.capatialize(t.type!)}_${t.id}_lim.jpg`
         },
         memberImageGetter (m) {
-            return '' && `img/member_${m.name.en.split(' ')[1].toLowerCase()}.jpg`
+            return '' && `/img/member_${m.name.en.split(' ')[1].toLowerCase()}.jpg`
         },
         cvImageGetter (m) {
-            return '' && `img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}.jpg`
+            return '' && `/img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}.jpg`
         }
     },
     plugins: {

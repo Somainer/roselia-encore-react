@@ -1,5 +1,7 @@
 # roselia-encore-react
 
+![Roselia-Encore-React](https://raw.githubusercontent.com/Somainer/roselia-encore-react/master/public/img/logo.png)
+
 在学习了React之后，我决定写一个东西练练手，就决定是你了，Roselia-Encore！
 
 之前的roselia-encore使用了Vue.js，但是我当时没有用到他的脚手架，导致了模板混入主页面，十分难看，而且为了图方便，我甚至把数据和逻辑放在了一起，使得改变模板变得麻烦，虽然我写了几个脚本来改善现状，但是还是比较尴尬，比不上官方的脚手架。

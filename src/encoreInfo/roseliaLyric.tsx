@@ -17,8 +17,8 @@ interface RandomLyric {
 }
 
 export class RoseliaLyrics extends React.Component<{}, RandomLyric> {
-    constructor () {
-        super({})
+    constructor (props: object) {
+        super(props)
         this.state = {
             album: '', 
             at: '', 

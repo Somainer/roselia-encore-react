@@ -25,6 +25,7 @@ export interface MemberInfo {
     horoscope: string
     encoreColor: string
     external?: ExternalText[]
+    [attrs: string]: any
 }
 
 interface LinkInfo {
@@ -50,6 +51,7 @@ export interface TrackInfo {
     links?: LinkInfo[]
     external?: ExternalText[],
     hasLimitedEdition?: boolean
+    [attrs: string]: any
 }
 
 export type ExternalLinks = LinkInfo[]
@@ -64,6 +66,7 @@ export interface RecommandVideo {
     name: string
     videos: VideoDetail[]
     authors: string[]
+    [attr: string]: any
 }
 
 interface VideoDetail {
@@ -97,6 +100,7 @@ export interface ExternalTrackList {
 }
 
 export interface SiteConfig {
+    configName: string
     playerUrl?: string
     siteLogo: string
     siteFavicon: string
@@ -111,4 +115,5 @@ export interface SiteConfig {
     getters: SiteImageGetter,
     plugins: SitePlugins,
     externalTrackLists?: ExternalTrackList[]
+    [attr: string]: any
 }

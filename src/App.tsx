@@ -1,18 +1,21 @@
 import * as React from 'react';
 import './App.css';
-import { Segment, Image, Button } from 'semantic-ui-react'
+// import { Segment } from 'semantic-ui-react'
 import 'semantic-ui/dist/semantic.css'
 
 // import logo from './logo.svg';
-// import {SelfishComponent} from './rhodonite/component'
+// import {TitledDocument} from './rhodonite/component'
 import roselia from './encoreInfo/roselia'
 import starlight from './encoreInfo/starlight'
 import {SupportedLanguages, SiteConfig} from './rhodonite/protocols/encore'
 
 import {NavBar} from './components/navbar'
-import {BannerImage} from './components/banner'
-import {memberSection, singleSection, albumSection, generalSection} from './components/section'
 import selfish from './rhodonite/utils/selfish';
+import {Index} from './components/index'
+import {MemberPage} from './components/member'
+import {footer} from './components/footer'
+import {Route, RouteComponentProps, Redirect} from 'react-router'
+import {BrowserRouter} from 'react-router-dom'
 
 // import * as NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -34,40 +37,58 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
     })
   }
 
-  private setEncore (obj: SiteConfig) {
+  /*private setSiteConfig(sc: SiteConfig) {
     return () => this.setState({
-      siteConfig: obj
+      siteConfig: sc
     })
+  }*/
+
+  private renderIndex() {
+    return () => {
+      // return import('./components/index').then(({Index}) => (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>))
+      return (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>)
+    }
+  }
+
+  private renderComponent(RenderComponent: React.ComponentType<any>, eternal: any) {
+    return (props: RouteComponentProps) => {
+      return (<RenderComponent {...props} {...this.state} {...eternal}></RenderComponent>)
+    }
   }
 
   public render() {
     const site = this.state.siteConfig
+    const StatedRoute = ({component, ...rest}: {component: React.ComponentType, [att: string]: any}) => (
+      <Route {...rest} render={this.renderComponent(component, rest.eternal)}></Route>
+    )
+    const StateSetter = (siteConfig: SiteConfig) =>
+      () => {
+        if(this.state.siteConfig !== siteConfig) this.setState({siteConfig})
+        return <Redirect to="/"></Redirect>
+      }
+      
+    
     return (
-      <Segment>
-        <div className="App">
-          <NavBar playerUrl={site.playerUrl} favicon={site.siteFavicon} setLanguage={this.methods.setLanguage}></NavBar>
-          <BannerImage {...site.bannerImage}></BannerImage>
-          <header className="App-header" style={{textAlign: 'center'}}>
-            <Image centered src={site.siteLogo} className={site.logoSpin ? "App-logo" : ""} />
-            {/* <img src={logo} className="App-logo"></img> */}
-            <h1 className="App-title">Roselia Encore</h1>
-            <p className="App-intro">
-              <p>Made with love by Somainer</p>
-              {/* To get started, edit <code>src/App.tsx</code> and save to reload. */}
-            </p>
-            <Button.Group>
-              <Button onClick={this.setEncore(roselia)}>Roselia</Button>
-              <Button.Or />
-              <Button onClick={this.setEncore(starlight)}>Revue Starlight</Button>
-            </Button.Group>
-          </header>
-          {memberSection(site, this.state.language)}
-          {singleSection(site, this.state.language)}
-          {site.albums && albumSection(site, this.state.language)}
-          {site.externalTrackLists && site.externalTrackLists.map(et => generalSection(et, site, this.state.language))}
-
-        </div>
-      </Segment>
+      <div>
+        <NavBar language={this.state.language} playerUrl={site.playerUrl} favicon={site.siteFavicon} setLanguage={this.methods.setLanguage}></NavBar>
+        <BrowserRouter>
+          <div>
+            <Route exact path="/" render={this.renderIndex()}></Route>
+            {/* <Route exact path="/starlight" render={this.renderIndex(starlight)}></Route> */}
+            {/* {site.members.map(m => {
+              const memberLink = `/member/${m.name.en.split(' ')[1]}`
+              return <StatedRoute key={memberLink} path={memberLink} component={MemberPage} eternal={{currentMember: m}}></StatedRoute>
+            })} */}
+            <Route path="/starlight" component={StateSetter(starlight)}></Route>
+            <Route path="/roselia" component={StateSetter(roselia)}></Route>
+            <StatedRoute path="/starlight/member/:member" component={MemberPage} eternal={{siteConfig: site}}></StatedRoute>
+            <StatedRoute path="/member/:member" component={MemberPage}></StatedRoute>
+            {/* <Route config={site} language={this.state.language}></Route> */}
+          </div>
+        </BrowserRouter>
+        {footer()}
+      </div>
+      
       
     );
   }

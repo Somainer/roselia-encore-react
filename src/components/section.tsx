@@ -3,6 +3,7 @@ import {Grid, Image, Container, Card, Header, Reveal} from 'semantic-ui-react'
 import './encore.css'
 import {SupportedLanguages, MultiLanguageAttribute, SiteConfig, ExternalTrackList} from '../rhodonite/protocols/encore'
 import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn} from '../rhodonite/protocols/helpers'
+import {Link} from 'react-router-dom'
 
 type SemanticColumnNum = 1 | 3 | 4
 
@@ -21,7 +22,40 @@ interface SectionCard {
     link?: string,
     meta?: string,
     description?: string
+    isDark?: boolean
 }
+
+const EncoreCard = (sc: SectionCard) => {
+    const linkProps = (sc.link ? {
+        as: Link,
+        to: sc.link
+    } : {})
+    return (
+    <Grid.Column key={sc.title}>
+        <div className="thumbnail">
+            <Card link {...linkProps} fluid style={{backgroundColor: sc.color}}>
+                {sc.secondaryImage ? (
+                    <Reveal animated='move'>
+                        <Reveal.Content visible>
+                            <Image src={sc.image} />
+                        </Reveal.Content>
+                        <Reveal.Content hidden>
+                            <Image src={sc.secondaryImage} />
+                        </Reveal.Content>
+                    </Reveal>
+                    ) : <Image src={sc.image}/>
+                }
+                <Card.Content>
+                    <Card.Header className={sc.isDark && " white-text" || ""}>
+                        {sc.title}
+                    </Card.Header>
+                    {sc.meta && <Card.Meta style={{color: sc.isDark && "rgba(255, 255, 255, 0.618)"}}>{sc.meta}</Card.Meta>}
+                    {sc.description && <Card.Description className={sc.isDark && " white-text" || ""}>{sc.description}</Card.Description>}
+                </Card.Content>
+            </Card>
+        </div>
+    </Grid.Column>
+)}
 
 export class EncoreSection extends React.Component<EncoreSectionProps> {
     public render() {
@@ -36,30 +70,8 @@ export class EncoreSection extends React.Component<EncoreSectionProps> {
                     </Grid.Row>
                     <Grid.Row columns={this.props.columns}>
                         {this.props.data.map(sc => (
-                            <Grid.Column key={sc.title}>
-                                <div className="thumbnail">
-                                    <Card link fluid style={{backgroundColor: sc.color}}>
-                                        {sc.secondaryImage ? (
-                                            <Reveal animated='move'>
-                                                <Reveal.Content visible>
-                                                    <Image src={sc.image} />
-                                                </Reveal.Content>
-                                                <Reveal.Content hidden>
-                                                    <Image src={sc.secondaryImage} />
-                                                </Reveal.Content>
-                                            </Reveal>
-                                            ) : <Image src={sc.image}/>
-                                        }
-                                        <Card.Content>
-                                            <Card.Header className={this.props.dark && " white-text" || ""}>
-                                                {sc.title}
-                                            </Card.Header>
-                                            {sc.meta && <Card.Meta style={{color: this.props.dark && "rgba(255, 255, 255, 0.618)"}}>{sc.meta}</Card.Meta>}
-                                            {sc.description && <Card.Description className={this.props.dark && " white-text" || ""}>{sc.description}</Card.Description>}
-                                        </Card.Content>
-                                    </Card>
-                                </div>
-                            </Grid.Column>
+                            
+                            <EncoreCard {...sc} isDark={this.props.dark} />
                         ))}
                     </Grid.Row>
                 </Grid>
@@ -85,7 +97,8 @@ export const memberSection = (si: SiteConfig, language: SupportedLanguages) => {
             secondaryImage: getters.cvImageGetter(m),
             color: m.encoreColor,
             meta: m.role,
-            description: `CV:${languageGetter(mergeLanguageAttribute(m.CVName))}`
+            description: `CV:${languageGetter(mergeLanguageAttribute(m.CVName))}`,
+            link: `/member/${m.name.en.split(' ')[1]}`
         })),
         dark: true
     }

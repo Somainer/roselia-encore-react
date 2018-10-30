@@ -272,30 +272,31 @@ const covers = Helper.makeTrackOf('cover')([
 ])
 
 const siteConfig: Helper.SiteConfig = {
+    configName: "roselia",
     members,
-    siteLogo: 'img/logo.png',
-    siteFavicon: 'img/roselia.png',
+    siteLogo: '/img/logo.png',
+    siteFavicon: '/img/roselia.png',
     singles,
     albums,
     covers,
     themeColor: '#5869b1',
     playerUrl: '' && 'https://music.163.com/outchain/player?type=0&id=1999324469&auto=0&height=430',
     bannerImage: {
-        foreground: 'img/roselia characters.png',
-        background: 'img/roselia-top.png'
+        foreground: '/img/roselia characters.png',
+        background: '/img/roselia-top.png'
     },
     getters: {
         trackImageGetter (t) {
-            return `img/${Helper.capatialize(t.type!)}_${t.id}.jpg`
+            return `/img/${Helper.capatialize(t.type!)}_${t.id}.jpg`
         },
         limitedTrackImageGetter (t) {
-            return `img/${Helper.capatialize(t.type!)}_${t.id}_lim.jpg`
+            return `/img/${Helper.capatialize(t.type!)}_${t.id}_lim.jpg`
         },
         memberImageGetter (m) {
-            return `img/member_${m.name.en.split(' ')[1].toLowerCase()}.jpg`
+            return `/img/member_${m.name.en.split(' ')[1].toLowerCase()}.jpg`
         },
         cvImageGetter (m) {
-            return `img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}.jpg`
+            return `/img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}.jpg`
         }
     },
     plugins: {

@@ -5,7 +5,8 @@ import {BannerImageConfig} from '../rhodonite/protocols/encore'
 
 export class BannerImage extends React.Component<BannerImageConfig> {
     get gradient () {
-        return this.props.gradient || "linear-gradient(45deg, rgba(20, 9, 49, 0.7) 0%, rgba(23, 0, 35, 0.68) 16%, rgba(1, 63, 145, 0.6) 78%, rgba(1, 64, 147, 0.57) 79%, rgba(1, 64, 147, 0.19) 93%, rgba(114, 197, 241, 0) 100%)"
+        if (typeof this.props.gradient === 'undefined') return "linear-gradient(45deg, rgba(20, 9, 49, 0.7) 0%, rgba(23, 0, 35, 0.68) 16%, rgba(1, 63, 145, 0.6) 78%, rgba(1, 64, 147, 0.57) 79%, rgba(1, 64, 147, 0.19) 93%, rgba(114, 197, 241, 0) 100%)"
+        return this.props.gradient
     }
     private fillHeight: React.CSSProperties = {
         height: '100vh',
@@ -14,7 +15,7 @@ export class BannerImage extends React.Component<BannerImageConfig> {
     private get backGroundStyle(): React.CSSProperties {
         return {
             ...this.fillHeight,
-            backgroundImage: `${this.gradient}, url('${this.props.background}')`,
+            backgroundImage: this.gradient ? `${this.gradient}, url('${this.props.background}')` : `url('${this.props.background}')`,
             backgroundSize: 'cover',
             ...(this.props.foreground ? {
                 filter: 'blur(25px) saturate(120%)',
@@ -49,11 +50,12 @@ export class BannerImage extends React.Component<BannerImageConfig> {
             <div>
                 <div className="hidden-xs banner" style={{height: '108vh'}}>
                     <div style={this.backGroundStyle}></div>
-                    {this.props.foreground &&
+                    
                     <div style={this.bannerImageStyle}>
-                        <img src={this.props.foreground} style={this.imageStyle}></img>
+                        <div style={{height: 'inherit'}}>{this.props.children}</div>
+                        {this.props.foreground &&<img src={this.props.foreground} style={this.imageStyle}></img>}
                     </div>
-                    }
+                    
                 </div>
                 {/* <div className="visible-xs">
                     <Image src="img/logo.png"></Image>

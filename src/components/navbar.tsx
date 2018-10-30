@@ -1,11 +1,15 @@
 import * as React from 'react'
 import {Menu, Modal, Dropdown, Visibility} from 'semantic-ui-react'
 import {LanguageNames, SupportedLanguages} from '../rhodonite/protocols/encore'
+import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers';
+
+import {throttle} from '../rhodonite/utils/throttle'
 
 interface NavBarConfig {
   playerUrl?: string,
   setLanguage(lang: SupportedLanguages): void,
   favicon: string
+  language: SupportedLanguages
 }
 
 class PlayerFrame extends React.Component<{link:string}> {
@@ -50,7 +54,7 @@ export class NavBar extends React.Component<NavBarConfig, {opened: boolean, menu
   }
 
   private fixedSetter(b: boolean) {
-    return () => this.setState({menuFixed: b})
+    return throttle(() => this.setState({menuFixed: b}), 1000)
   }
 
   private menuStyle: React.CSSProperties = {
@@ -93,7 +97,11 @@ export class NavBar extends React.Component<NavBarConfig, {opened: boolean, menu
               </Menu.Item>
             }
 
-            <Dropdown item text="Language">
+            <Dropdown item text={getLanguageAttribute({
+              cn: "语言",
+              jp: "言語",
+              en: "Language"
+            }, this.props.language)}>
                 <Dropdown.Menu>
                   {Object.keys(LanguageNames).map(name => (
                     <Dropdown.Item key={name} onClick={this.languageSetter(name as SupportedLanguages)}>{LanguageNames[name]}</Dropdown.Item>
