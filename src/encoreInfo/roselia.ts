@@ -1,5 +1,8 @@
 import * as Helper from '../rhodonite/protocols/helpers'
-import {RoseliaLyrics} from './roseliaLyric'
+// import {RoseliaLyrics} from './roseliaLyric'
+
+import {lazyComponent} from '../rhodonite/lazycomponent'
+const RoseliaLyrics = () => import('./roseliaLyric').then(x => x.RoseliaLyrics)
 // import {Component} from 'react'
 
 const members = Helper.makeMembers([
@@ -252,25 +255,6 @@ const albums = Helper.makeTrackOf('album')([
     }
 ])
 
-const covers = Helper.makeTrackOf('cover')([
-    {
-        id: 1,
-        title: "バンドリ！ ガールズバンドパーティ！ カバーコレクション Vol.1",
-        track: ["光るなら / Poppin’Party", "千本桜 / Poppin’Party", "アスノヨゾラ哨戒班 / Afterglow", "READY STEADY GO / Afterglow", "secret base ～君がくれたもの～ / Pastel＊Palettes", "ふわふわ時間 / Pastel＊Palettes", "魂のルフラン / Roselia", "ETERNAL BLAZE / Roselia", "いーあるふぁんくらぶ / ハロー、ハッピーワールド！", "ロメオ / ハロー、ハッピーワールド！"],
-        releaseDate: "2018-06-27",
-        links: [
-            {
-                description: "BanG Dream",
-                link: "https://bang-dream.com/cd/%E3%83%90%E3%83%B3%E3%83%89%E3%83%AA%EF%BC%81-%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA%E3%83%90%E3%83%B3%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%EF%BC%81-%E3%82%AB%E3%83%90%E3%83%BC%E3%82%B3%E3%83%AC/"
-            },
-            {
-                description: "NetEase",
-                link: "http://music.163.com/m/album?id=38272155"
-            }
-        ]
-    }
-])
-
 const siteConfig: Helper.SiteConfig = {
     configName: "roselia",
     members,
@@ -278,13 +262,40 @@ const siteConfig: Helper.SiteConfig = {
     siteFavicon: '/img/roselia.png',
     singles,
     albums,
-    covers,
     themeColor: '#5869b1',
     playerUrl: '' && 'https://music.163.com/outchain/player?type=0&id=1999324469&auto=0&height=430',
     bannerImage: {
         foreground: '/img/roselia characters.png',
         background: '/img/roselia-top.png'
     },
+    externalTrackLists: Helper.makeExternalTrackList([
+        {
+            displayName: {
+                cn: '翻唱集',
+                en: 'Cover Collection',
+                jp: 'カバーコレクション'
+            },
+            trackType: 'cover',
+            trackList: [
+                {
+                    id: 1,
+                    title: "バンドリ！ ガールズバンドパーティ！ カバーコレクション Vol.1",
+                    track: ["光るなら / Poppin’Party", "千本桜 / Poppin’Party", "アスノヨゾラ哨戒班 / Afterglow", "READY STEADY GO / Afterglow", "secret base ～君がくれたもの～ / Pastel＊Palettes", "ふわふわ時間 / Pastel＊Palettes", "魂のルフラン / Roselia", "ETERNAL BLAZE / Roselia", "いーあるふぁんくらぶ / ハロー、ハッピーワールド！", "ロメオ / ハロー、ハッピーワールド！"],
+                    releaseDate: "2018-06-27",
+                    links: [
+                        {
+                            description: "BanG Dream",
+                            link: "https://bang-dream.com/cd/%E3%83%90%E3%83%B3%E3%83%89%E3%83%AA%EF%BC%81-%E3%82%AC%E3%83%BC%E3%83%AB%E3%82%BA%E3%83%90%E3%83%B3%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%EF%BC%81-%E3%82%AB%E3%83%90%E3%83%BC%E3%82%B3%E3%83%AC/"
+                        },
+                        {
+                            description: "NetEase",
+                            link: "http://music.163.com/m/album?id=38272155"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]),
     getters: {
         trackImageGetter (t) {
             return `/img/${Helper.capatialize(t.type!)}_${t.id}.jpg`
@@ -300,7 +311,7 @@ const siteConfig: Helper.SiteConfig = {
         }
     },
     plugins: {
-        single: RoseliaLyrics
+        single: lazyComponent(RoseliaLyrics)
     }
 }
 

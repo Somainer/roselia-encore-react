@@ -18,7 +18,8 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
-    "declaration": false
+    "declaration": false,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

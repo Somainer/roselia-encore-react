@@ -11,14 +11,18 @@ import {SupportedLanguages, SiteConfig} from './rhodonite/protocols/encore'
 
 import {NavBar} from './components/navbar'
 import selfish from './rhodonite/utils/selfish';
-import {Index} from './components/index'
-import {MemberPage} from './components/member'
+// import {Index} from './components/index'
+// import {MemberPage} from './components/member' 
 import {footer} from './components/footer'
-import {Route, RouteComponentProps, Redirect} from 'react-router'
+import {Route, RouteComponentProps, Switch} from 'react-router'
 import {BrowserRouter} from 'react-router-dom'
+import {ScrollToTopRouter} from './rhodonite/component'
+import {lazyComponent} from './rhodonite/lazycomponent'
+import {CSSTransition} from 'react-transition-group'
 
 // import * as NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { NotFound } from './components/notfound';
 
 class App extends React.Component<{}, {language: SupportedLanguages, siteConfig: SiteConfig}> {
   private methods: App = this
@@ -43,12 +47,13 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
     })
   }*/
 
-  private renderIndex() {
-    return () => {
-      // return import('./components/index').then(({Index}) => (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>))
-      return (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>)
-    }
-  }
+  // private renderIndex() {
+  //   return () => {
+  //     // return import('./components/index').then(({Index}) => (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>))
+  //     return React.createElement(lazyComponent(() => import('./components/index').then(x => x.Index)), this.state)
+  //     // return (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>)
+  //   }
+  // }
 
   private renderComponent(RenderComponent: React.ComponentType<any>, eternal: any) {
     return (props: RouteComponentProps) => {
@@ -58,32 +63,44 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
 
   public render() {
     const site = this.state.siteConfig
-    const StatedRoute = ({component, ...rest}: {component: React.ComponentType, [att: string]: any}) => (
-      <Route {...rest} render={this.renderComponent(component, rest.eternal)}></Route>
-    )
+    const StatedRoute = ({component, ...rest}: {component: React.ComponentType, [att: string]: any}) => {
+      if(rest.onRender) rest.onRender()
+      return (
+      <ScrollToTopRouter {...rest} render={this.renderComponent(component, rest.eternal)}></ScrollToTopRouter>
+      )
+    }
     const StateSetter = (siteConfig: SiteConfig) =>
       () => {
         if(this.state.siteConfig !== siteConfig) this.setState({siteConfig})
-        return <Redirect to="/"></Redirect>
+        // return <Redirect to="/"></Redirect>
       }
-      
+    
+      // const LazyMemberPage = lazyComponent(() => import('./components/member').then(p => p.MemberPage))
+      const LazyIndex = lazyComponent(() => import('./components/index').then(x => x.Index))
     
     return (
       <div>
         <NavBar language={this.state.language} playerUrl={site.playerUrl} favicon={site.siteFavicon} setLanguage={this.methods.setLanguage}></NavBar>
         <BrowserRouter>
           <div>
-            <Route exact path="/" render={this.renderIndex()}></Route>
-            {/* <Route exact path="/starlight" render={this.renderIndex(starlight)}></Route> */}
-            {/* {site.members.map(m => {
-              const memberLink = `/member/${m.name.en.split(' ')[1]}`
-              return <StatedRoute key={memberLink} path={memberLink} component={MemberPage} eternal={{currentMember: m}}></StatedRoute>
-            })} */}
-            <Route path="/starlight" component={StateSetter(starlight)}></Route>
-            <Route path="/roselia" component={StateSetter(roselia)}></Route>
-            <StatedRoute path="/starlight/member/:member" component={MemberPage} eternal={{siteConfig: site}}></StatedRoute>
-            <StatedRoute path="/member/:member" component={MemberPage}></StatedRoute>
+            <CSSTransition classNames="fade" timeout={300}>
+
+              <Switch>
+                <StatedRoute path="/starlight/" component={LazyIndex} onRender={StateSetter(starlight)}></StatedRoute>
+                <StatedRoute path="/" component={LazyIndex} onRender={StateSetter(roselia)}></StatedRoute>
+                {/* <Route exact path="/starlight" render={this.renderIndex(starlight)}></Route> */}
+                {/* {site.members.map(m => {
+                  const memberLink = `/member/${m.name.en.split(' ')[1]}`
+                  return <StatedRoute key={memberLink} path={memberLink} component={MemberPage} eternal={{currentMember: m}}></StatedRoute>
+                })} */}
+                {/* <Route path="/roselia" component={StateSetter(roselia)}></Route> */}
+                {/* <StatedRoute path="/starlight/member/:member" component={LazyMemberPage} eternal={{siteConfig: site}}></StatedRoute> */}
+                {/* <StatedRoute path="/member/:member" component={LazyMemberPage}></StatedRoute> */}
+                <Route component={NotFound}></Route>
             {/* <Route config={site} language={this.state.language}></Route> */}
+              </Switch>
+            </CSSTransition>
+            
           </div>
         </BrowserRouter>
         {footer()}

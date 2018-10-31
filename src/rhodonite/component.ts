@@ -1,5 +1,6 @@
 import * as React from 'react'
 import selfish from './utils/selfish'
+import { Route, RouteProps } from 'react-router-dom';
 
 
 export class SelfishComponent<P extends object = {}, S extends object = {}> extends React.Component<P, S> {
@@ -40,3 +41,21 @@ export class TitledDocument extends React.Component<{title: string}, {title: str
         return (this.props.children)
     }
 }
+
+export class ScrollToTopRouter extends React.Component<RouteProps> {
+    public componentDidUpdate (prevProps: RouteProps) {
+        window.scrollTo(0, 0)
+        if (this.props.path === this.props.location!.pathname && this.props.location!.pathname !== prevProps.location!.pathname) {
+            window.scrollTo(0, 0)
+        }
+    }
+
+    public render () {
+        const { component: Component, ...rest } = this.props;
+        
+        return React.createElement(Route, {...rest, render: rest.render || ((props: any) => React.createElement(Component!, props))})
+        // return <Route {...rest} render={props => (<Component {...props} />)} />;
+    }
+}
+
+// export const ScrollToTopRouter = withRouter(ScrollToTop)

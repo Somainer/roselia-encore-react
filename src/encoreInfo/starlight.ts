@@ -305,7 +305,7 @@ const siteConfig: Helper.SiteConfig = {
     plugins: {
         member: Kirin
     },
-    externalTrackLists: [
+    externalTrackLists: Helper.makeExternalTrackList([
         {
             displayName: {
                 cn: '原声带',
@@ -319,7 +319,6 @@ const siteConfig: Helper.SiteConfig = {
                     title: "少女☆歌劇 レヴュースタァライト",
                     track: ["星摘みのメロディ", "星のおどり場", "ふたりのセレナーデ", "halation", "pied à pied：一歩ずつ", "小鳥のアラベスク", "少女たちのプレリュード", "プロムナード", "starhood", "dot to dot", "歯車", "daydream", "anti daydream", "starlight curtain", "華恋とひかり", "深遠", "キリンのためのワルツ", "キリンのためのアダージョ", "暗転", "カタストロフ", "Elle est belle：美しい人", "rendez-vous：遥かなる約束", "クイックステップダンス", "夢を振りまいて", "子猫のカーニバル", "ランチボックス", "ハッピーインターリュード", "バナナの叩き売り", "ギニョール", "ロンド・ロンド・ロンド", "星摘みの塔", "星罪", "ブリッジの上で", "dawn of the star", "ki-ringtone", "再生産"],
                     releaseDate: "2018-10-17",
-                    type: 'ost',
                     links: [
                         {
                             description: "Revue Starlight",
@@ -347,7 +346,6 @@ const siteConfig: Helper.SiteConfig = {
                     title: "「少女☆歌劇 レヴュースタァライト」劇中歌アルバムVol.1 「ラ レヴュー ド マチネ」",
                     track: ["世界を灰にするまで", "The Star Knows", "誇りと驕り", "恋の魔球", "花咲か唄", "Fly Me to the Star #3", "Fly Me to the Star #4", "Fly Me to the Star #5", "Fly Me to the Star #6", "Fly Me to the Star #7"],
                     releaseDate: "2018-8-22",
-                    type: 'ost',
                     links: [
                         {
                             description: "Revue Starlight",
@@ -365,7 +363,6 @@ const siteConfig: Helper.SiteConfig = {
                     title: "「少女☆歌劇 レヴュースタァライト」劇中歌アルバムVol.2 「ラ レヴュー ド ソワレ」",
                     track: ["RE:CREATE", "星々の絆", "-Star Divine- フィナーレ", "舞台少女心得 幕間", "スタァライト", "Fly Me to the Star #8", "Fly Me to the Star #9", "Fly Me to the Star #10", "Fly Me to the Star #11", "星摘みの歌"],
                     releaseDate: "2018-10-17",
-                    type: 'ost',
                     links: [
                         {
                             description: "Revue Starlight",
@@ -379,7 +376,7 @@ const siteConfig: Helper.SiteConfig = {
                 }
             ]
         }
-    ]
+    ])
 }
 
 export default siteConfig

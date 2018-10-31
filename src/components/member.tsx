@@ -7,6 +7,7 @@ import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers'
 import { TitledDocument } from 'src/rhodonite/component';
 // import {BannerImage} from './banner'
 import selfish from '../rhodonite/utils/selfish'
+import { NotFound } from './notfound';
 
 const notFoundMember: Protocol.MemberInfo = {
     name: {
@@ -40,18 +41,22 @@ export function iterAttribute(attr: Protocol.MultiLanguageAttribute | Protocol.M
     return [attr]
 }
 
-function optionalBoolean (f?: boolean) {
+export function optionalBoolean (f?: boolean) {
     return typeof f === 'undefined' || f
 }
 
-const IndentText = ({indent, children} :{indent?: boolean, children?: any}) => <p style={{textIndent: optionalBoolean(indent) ? '2em' : 'inherit', fontSize: '1.33em'}}>{children}</p>
-const HiddenText = ({hidden = true, children}: {hidden?: boolean, children?: any}) => <span className={hidden ? "heimu" : ""}>{children}</span>
+export const IndentText = ({indent, children} :{indent?: boolean, children?: any}) => <p style={{textIndent: optionalBoolean(indent) ? '2em' : 'inherit', fontSize: '1.33em'}}>{children}</p>
+export const HiddenText = ({hidden = true, children}: {hidden?: boolean, children?: any}) => <span className={hidden ? "heimu" : ""}>{children}</span>
 
 export class MemberPage extends React.PureComponent<MemberPageProps> {
     private methods = selfish(this)
-    public componentDidMount() {
+    public componentWillMount () {
         // tslint:disable-next-line:no-console
         console.log(this.props)
+    }
+    public componentDidMount() {
+        // tslint:disable-next-line:no-console
+        window.scroll(0, 0)
     }
     private getCurrentMember() {
         return this.props.currentMember || this.props.siteConfig.members.filter(x => x.name.en.split(' ')[1].toLowerCase() === this.props.match.params.member.toLowerCase())[0]
@@ -61,6 +66,9 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
     }
     private get member () {
         return this.getCurrentMember() || notFoundMember
+    }
+    private get memberFound () {
+        return !!this.getCurrentMember()
     }
     private memberLayout = () => {
         const member = this.member
@@ -93,6 +101,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
         )
     }
     public render() {
+        if (!this.memberFound) return <NotFound></NotFound>
         const member = this.member
         const IntroLayout = this.methods.introLayout
         // const getters = this.props.siteConfig.getters

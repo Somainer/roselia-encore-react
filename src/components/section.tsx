@@ -98,7 +98,7 @@ export const memberSection = (si: SiteConfig, language: SupportedLanguages) => {
             color: m.encoreColor,
             meta: m.role,
             description: `CV:${languageGetter(mergeLanguageAttribute(m.CVName))}`,
-            link: `/member/${m.name.en.split(' ')[1]}`
+            link: `member/${m.name.en.split(' ')[1]}/`
         })),
         dark: true
     }
@@ -147,6 +147,7 @@ export const singleSection = (si: SiteConfig, language: SupportedLanguages) => {
             image: getters.trackImageGetter(t),
             secondaryImage: t.hasLimitedEdition ? getters.limitedTrackImageGetter(t) : void 0,
             meta: t.displayId || `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}`,
+            link: `single/${t.displayId || `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}`}`
         }))
     }}>{Plugin && <Plugin/>}</EncoreSection>
 }
@@ -167,6 +168,7 @@ export const albumSection = (si: SiteConfig, language: SupportedLanguages) => {
             image: getters.trackImageGetter(t),
             secondaryImage: t.hasLimitedEdition ? getters.limitedTrackImageGetter(t) : void 0,
             meta: `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'} album`,
+            link: `album/${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}`
         }))
     })).render()
 }
@@ -182,6 +184,7 @@ export const generalSection = (gs: ExternalTrackList, si: SiteConfig, language: 
             image: getters.trackImageGetter(t),
             secondaryImage: t.hasLimitedEdition ? getters.limitedTrackImageGetter(t) : void 0,
             meta: t.displayId ? t.displayId : `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'} ${gs.trackType}`,
+            link: `${gs.displayName.en}/` + (t.displayId ? t.displayId : `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}`)
         }))
     }}/>
 }

@@ -5,7 +5,8 @@ import {
     RecommandVideo,
     SiteConfig,
     TrackType,
-    MultiLanguageAttribute
+    MultiLanguageAttribute,
+    ExternalTrackList
 } from './encore'
 
 export class BilibiliVideoAdapter implements RecommandVideoAdapter {
@@ -74,6 +75,20 @@ export function sameDate (originDate?: Date, exact: boolean=false) {
 
 export function makeCompareOn<T, U> (key: (t: T) => U, comparer: (u: U) => boolean) {
     return (t: T) => comparer(key(t))
+}
+export function makeExternalTrackList (etl: ExternalTrackList): ExternalTrackList
+export function makeExternalTrackList (etl: ExternalTrackList[]): ExternalTrackList[]
+export function makeExternalTrackList (etl: ExternalTrackList | ExternalTrackList[]): ExternalTrackList | ExternalTrackList[] {
+    if (etl instanceof Array) {
+        return etl.map(l => makeExternalTrackList(l))
+    }
+    return {
+        ...etl,
+        trackList: etl.trackList.map(x => ({
+            ...x,
+            type: etl.trackType
+        }))
+    }
 }
 
 export {
