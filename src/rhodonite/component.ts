@@ -44,7 +44,9 @@ export class TitledDocument extends React.Component<{title: string}, {title: str
 
 export class ScrollToTopRouter extends React.Component<RouteProps> {
     public componentDidUpdate (prevProps: RouteProps) {
-        window.scrollTo(0, 0)
+        // tslint:disable-next-line:no-console
+        // console.log(this.props, prevProps, this.props.path === this.props.location!.pathname && this.props.location!.pathname !== prevProps.location!.pathname)
+        // window.scrollTo(0, 0)
         if (this.props.path === this.props.location!.pathname && this.props.location!.pathname !== prevProps.location!.pathname) {
             window.scrollTo(0, 0)
         }

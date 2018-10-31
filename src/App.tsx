@@ -57,7 +57,7 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
 
   private renderComponent(RenderComponent: React.ComponentType<any>, eternal: any) {
     return (props: RouteComponentProps) => {
-      return (<RenderComponent {...props} {...this.state} {...eternal}></RenderComponent>)
+      return (<RenderComponent {...this.state} {...eternal} {...props}></RenderComponent>)
     }
   }
 
@@ -66,7 +66,7 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
     const StatedRoute = ({component, ...rest}: {component: React.ComponentType, [att: string]: any}) => {
       if(rest.onRender) rest.onRender()
       return (
-      <ScrollToTopRouter {...rest} render={this.renderComponent(component, rest.eternal)}></ScrollToTopRouter>
+      <ScrollToTopRouter {...rest} render={this.renderComponent(component, rest)}></ScrollToTopRouter>
       )
     }
     const StateSetter = (siteConfig: SiteConfig) =>
@@ -77,12 +77,20 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
     
       // const LazyMemberPage = lazyComponent(() => import('./components/member').then(p => p.MemberPage))
       const LazyIndex = lazyComponent(() => import('./components/index').then(x => x.Index))
-    
+      const navBarProps = {
+        playerUrl: site.playerUrl,
+        favicon: site.siteFavicon,
+        setLanguage: this.methods.setLanguage,
+        language: this.state.language,
+        indexPath: this.state.siteConfig.configName === 'roselia' ? '/' : '/starlight/'
+      }
     return (
       <div>
-        <NavBar language={this.state.language} playerUrl={site.playerUrl} favicon={site.siteFavicon} setLanguage={this.methods.setLanguage}></NavBar>
+        {/* <NavBar language={this.state.language} playerUrl={site.playerUrl} favicon={site.siteFavicon} setLanguage={this.methods.setLanguage}></NavBar> */}
         <BrowserRouter>
           <div>
+            <NavBar {...navBarProps}></NavBar>
+            {/* <StatedRoute path="/" component={NavBar} {...navBarProps}></StatedRoute> */}
             <CSSTransition classNames="fade" timeout={300}>
 
               <Switch>

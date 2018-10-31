@@ -53,7 +53,7 @@ export class Index extends React.Component<IndexProps, {}> {
                     <p>Made with love by Somainer</p>
                     {/* To get started, edit <code>src/App.tsx</code> and save to reload. */}
                     </p>
-                    <p>为了演示可扩展性，目前这里有两个预制配置，阁下想要看哪一个？</p>
+                    <p>为了演示可扩展性，目前这里有两个预制配置，阁下（DD）想要看哪一个？</p>
                     <Button.Group>
                     <Link to="/"><Button positive={site.configName === 'roselia'}>Roselia</Button></Link>
                     <Button.Or />

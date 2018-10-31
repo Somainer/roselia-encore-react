@@ -4,12 +4,14 @@ import {LanguageNames, SupportedLanguages} from '../rhodonite/protocols/encore'
 import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers';
 
 import {throttle} from '../rhodonite/utils/throttle'
+import { Link } from 'react-router-dom';
 
 interface NavBarConfig {
   playerUrl?: string,
   setLanguage(lang: SupportedLanguages): void,
   favicon: string
   language: SupportedLanguages
+  indexPath?: string
 }
 
 class PlayerFrame extends React.Component<{link:string}> {
@@ -85,7 +87,7 @@ export class NavBar extends React.Component<NavBarConfig, {opened: boolean, menu
          fixed={this.state.menuFixed ? 'top' : void 0}
          style={this.state.menuFixed ? this.fixedMenuStyle : this.menuStyle}
         >
-          <Menu.Item name='logo'>
+          <Menu.Item name='logo' as={Link} to={this.props.indexPath || "/"}>
             <img src={this.props.favicon} />
           </Menu.Item>
         

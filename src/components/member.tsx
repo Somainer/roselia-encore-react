@@ -52,7 +52,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
     private methods = selfish(this)
     public componentWillMount () {
         // tslint:disable-next-line:no-console
-        console.log(this.props)
+        // console.log(this.props)
     }
     public componentDidMount() {
         // tslint:disable-next-line:no-console

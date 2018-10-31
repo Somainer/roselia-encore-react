@@ -24,6 +24,9 @@ class TrackPage extends React.Component<TrackPageProps> {
     protected getCurrentTrack (): Protocol.TrackInfo | undefined {
         return undefined // Should be overloaded
     }
+    public componentDidMount () {
+        window.scrollTo(0, 0)
+    }
 
     // @cached
     protected findIn (ls: Protocol.TrackInfo[]) {

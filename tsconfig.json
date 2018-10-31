@@ -29,6 +29,7 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
-    "src/semantic"
+    "src/semantic",
+    "docs"
   ]
 }

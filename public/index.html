@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#5869b1">
+    <meta name="description" content="Roselia Encore 是Roselia的（非官方）应援站">
+    <meta name="keywords" content="Roselia, roselia">
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -66,6 +68,13 @@
         <p>Roselia Encore</p>
       </div>
     </div>
+    <script>
+      const redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+      }
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
