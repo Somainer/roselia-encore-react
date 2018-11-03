@@ -4,6 +4,8 @@ import './encore.css'
 import {SupportedLanguages, MultiLanguageAttribute, SiteConfig, ExternalTrackList} from '../rhodonite/protocols/encore'
 import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn} from '../rhodonite/protocols/helpers'
 import {Link} from 'react-router-dom'
+import {getPositionByNum} from '../rhodonite/protocols/helpers'
+import {lazyImageOf} from '../rhodonite/lazyimage'
 
 type SemanticColumnNum = 1 | 3 | 4
 
@@ -11,7 +13,8 @@ interface EncoreSectionProps {
     title: string
     columns: SemanticColumnNum,
     data: SectionCard[],
-    dark?: boolean
+    dark?: boolean,
+    lazyImageSrc?: string
 }
 
 interface SectionCard {
@@ -22,7 +25,12 @@ interface SectionCard {
     link?: string,
     meta?: string,
     description?: string
-    isDark?: boolean
+    isDark?: boolean,
+    lazyImageSrc?: string
+}
+
+function positionWithNumByNum (num: number) {
+    return `${num}${getPositionByNum(num)}`
 }
 
 const EncoreCard = (sc: SectionCard) => {
@@ -30,6 +38,7 @@ const EncoreCard = (sc: SectionCard) => {
         as: Link,
         to: sc.link
     } : {})
+    const LazyImage = lazyImageOf(sc.lazyImageSrc)
     return (
     <Grid.Column key={sc.title}>
         <div className="thumbnail">
@@ -37,13 +46,15 @@ const EncoreCard = (sc: SectionCard) => {
                 {sc.secondaryImage ? (
                     <Reveal animated='move'>
                         <Reveal.Content visible>
-                            <Image src={sc.image} />
+                            {/* <Image src={sc.image} /> */}
+                            <LazyImage src={sc.image} />
                         </Reveal.Content>
                         <Reveal.Content hidden>
-                            <Image src={sc.secondaryImage} />
+                            {/* <Image src={sc.secondaryImage} /> */}
+                            <LazyImage src={sc.secondaryImage} />
                         </Reveal.Content>
                     </Reveal>
-                    ) : <Image src={sc.image}/>
+                    ) : <LazyImage src={sc.image}/>
                 }
                 <Card.Content>
                     <Card.Header className={sc.isDark && " white-text" || ""}>
@@ -71,7 +82,7 @@ export class EncoreSection extends React.Component<EncoreSectionProps> {
                     <Grid.Row columns={this.props.columns}>
                         {this.props.data.map(sc => (
                             
-                            <EncoreCard {...sc} isDark={this.props.dark} />
+                            <EncoreCard {...sc} isDark={this.props.dark} lazyImageSrc={this.props.lazyImageSrc} />
                         ))}
                     </Grid.Row>
                 </Grid>
@@ -100,7 +111,8 @@ export const memberSection = (si: SiteConfig, language: SupportedLanguages) => {
             description: `CV:${languageGetter(mergeLanguageAttribute(m.CVName))}`,
             link: `member/${m.name.en.split(' ')[1]}/`
         })),
-        dark: true
+        dark: true,
+        lazyImageSrc: si.siteLogo
     }
     const birthdayMembers = mi.filter(makeCompareOn(x => x.birthday, sameDate()))
     const Plugin = si.plugins.member
@@ -125,7 +137,7 @@ export const memberSection = (si: SiteConfig, language: SupportedLanguages) => {
                     </Card>
                 </div>
             ))}
-                                
+            
         </EncoreSection>
     )
 }
@@ -135,21 +147,23 @@ export const singleSection = (si: SiteConfig, language: SupportedLanguages) => {
     const {getters} = si
     const languageGetter = (ml: MultiLanguageAttribute) => getLanguageAttribute(ml, language || 'cn')
     const Plugin = si.plugins.single
-    return <EncoreSection {...{
+    const sectionProps: EncoreSectionProps = {
         title: languageGetter({
             cn: '单曲',
             en: 'Single',
             jp: 'シングル'
         }),
-        columns: 4,
+        columns: 4 as 4,
         data: ti.map(t => ({
             title: `${t.title}`,
             image: getters.trackImageGetter(t),
             secondaryImage: t.hasLimitedEdition ? getters.limitedTrackImageGetter(t) : void 0,
-            meta: t.displayId || `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}`,
-            link: `single/${t.displayId || `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}`}/`
-        }))
-    }}>{Plugin && <Plugin/>}</EncoreSection>
+            meta: t.displayId || `${t.id}${getPositionByNum(t.id)}`,
+            link: `single/${t.displayId || positionWithNumByNum(t.id)}/`
+        })),
+        lazyImageSrc: si.siteLogo
+    }
+    return <EncoreSection {...sectionProps}>{Plugin && <Plugin/>}</EncoreSection>
 }
 
 export const albumSection = (si: SiteConfig, language: SupportedLanguages) => {
@@ -168,8 +182,9 @@ export const albumSection = (si: SiteConfig, language: SupportedLanguages) => {
             image: getters.trackImageGetter(t),
             secondaryImage: t.hasLimitedEdition ? getters.limitedTrackImageGetter(t) : void 0,
             meta: `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'} album`,
-            link: `album/${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}/`
-        }))
+            link: `album/${t.id}${getPositionByNum(t.id)}/`
+        })),
+        lazyImageSrc: si.siteLogo
     })).render()
 }
 
@@ -185,6 +200,7 @@ export const generalSection = (gs: ExternalTrackList, si: SiteConfig, language: 
             secondaryImage: t.hasLimitedEdition ? getters.limitedTrackImageGetter(t) : void 0,
             meta: t.displayId ? t.displayId : `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'} ${gs.trackType}`,
             link: `${gs.displayName.en}/` + (t.displayId ? t.displayId : `${t.id}${['st', 'nd', 'rd'][t.id - 1] || 'th'}/`)
-        }))
+        })),
+        lazyImageSrc: si.siteLogo
     }}/>
 }

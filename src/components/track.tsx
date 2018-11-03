@@ -3,9 +3,10 @@ import * as Protocol from '../rhodonite/protocols/encore'
 import * as Helpers from '../rhodonite/protocols/helpers'
 import {RouteComponentProps} from 'react-router'
 import {HiddenText, IndentText, optionalBoolean} from './member'
-import {Header, Container, Segment, Image, Divider, Grid} from 'semantic-ui-react'
+import {Header, Container, Segment, Divider, Grid} from 'semantic-ui-react'
 import { NotFound } from './notfound';
 import { TitledDocument } from 'src/rhodonite/component';
+import {lazyImageOf} from '../rhodonite/lazyimage'
 // import {cached} from '../rhodonite/utils/property'
 
 interface TrackLocationProps {
@@ -16,10 +17,9 @@ interface TrackPageProps extends RouteComponentProps<TrackLocationProps> {
     language: Protocol.SupportedLanguages
     siteConfig: Protocol.SiteConfig
 }
-function getPositionByNum (x: number) {
-    if (x > 10 && x < 20) return 'th'
-    return ['st', 'nd', 'rd'][(x % 10) - 1] || 'th'
-}
+
+const {getPositionByNum} = Helpers
+
 class TrackPage extends React.Component<TrackPageProps> {
     protected getCurrentTrack (): Protocol.TrackInfo | undefined {
         return undefined // Should be overloaded
@@ -95,6 +95,7 @@ class TrackPage extends React.Component<TrackPageProps> {
             </div>
             
         ) : (<div></div>)
+        const LazyImage = lazyImageOf(this.props.siteConfig.siteLogo)
         
         return (
             <Segment style={{ padding: '8em 0em' }} vertical>
@@ -130,10 +131,10 @@ class TrackPage extends React.Component<TrackPageProps> {
                         ))}
                     </Grid.Column>
                     <Grid.Column floated='right' width={8}>
-                        <Image fluid bordered rounded size='massive' src={getters.trackImageGetter(track)} />
+                        <LazyImage fluid bordered rounded size='massive' src={getters.trackImageGetter(track)} />
                         <Divider hidden />
                         {track.hasLimitedEdition && (
-                        <Image fluid bordered rounded size='massive' src={getters.limitedTrackImageGetter(track)} />)}
+                        <LazyImage fluid bordered rounded size='massive' src={getters.limitedTrackImageGetter(track)} />)}
                     </Grid.Column>
                     </Grid.Row>
                     

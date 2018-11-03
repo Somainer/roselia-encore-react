@@ -91,6 +91,11 @@ export function makeExternalTrackList (etl: ExternalTrackList | ExternalTrackLis
     }
 }
 
+export function getPositionByNum (x: number) {
+    if (x > 10 && x < 20) return 'th'
+    return ['st', 'nd', 'rd'][(x % 10) - 1] || 'th'
+}
+
 export {
     makeMembers,
     makeTracks,

@@ -1,13 +1,14 @@
 import * as React from 'react'
 import * as Protocol from '../rhodonite/protocols/encore'
 import * as Helpers from '../rhodonite/protocols/helpers'
-import {Container, Header, Segment, Grid, Image, Divider} from 'semantic-ui-react'
+import {Container, Header, Segment, Grid, Divider} from 'semantic-ui-react'
 import {RouteComponentProps} from 'react-router'
 import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers'
 import { TitledDocument } from 'src/rhodonite/component';
 // import {BannerImage} from './banner'
 import selfish from '../rhodonite/utils/selfish'
 import { NotFound } from './notfound';
+import {lazyImageOf} from '../rhodonite/lazyimage'
 
 const notFoundMember: Protocol.MemberInfo = {
     name: {
@@ -143,6 +144,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
             React.createElement(as||'p', null, <a href={generator(wiki)}>{wikiName}({wiki})</a>)
         )
         const MoegirlLink = WikiLink('萌娘百科', s => `https://zh.moegirl.org/${s}`)
+        const LazyImage = lazyImageOf(this.props.siteConfig.siteLogo)
         return (
             <Segment style={{ padding: '8em 0em' }} vertical>
                 <Grid container stackable verticalAlign='middle'>
@@ -179,9 +181,9 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                         </AttrWithTitle>
                     </Grid.Column>
                     <Grid.Column floated='right' width={8}>
-                        <Image fluid bordered rounded size='massive' src={getters.memberImageGetter(member)} />
+                        <LazyImage fluid bordered rounded size='massive' src={getters.memberImageGetter(member)} />
                         <Divider hidden />
-                        <Image fluid bordered rounded size='massive' src={getters.cvImageGetter(member)} />
+                        <LazyImage fluid bordered rounded size='massive' src={getters.cvImageGetter(member)} />
                     </Grid.Column>
                     </Grid.Row>
                     
