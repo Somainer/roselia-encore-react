@@ -1,7 +1,5 @@
 import * as Helper from '../rhodonite/protocols/helpers'
-// import {RoseliaLyrics} from './roseliaLyric'
-
-import {lazyComponent} from '../rhodonite/lazycomponent'
+import { asyncComponent } from "../rhodonite/asynccomponent";
 const RoseliaLyrics = () => import('./roseliaLyric').then(x => x.RoseliaLyrics)
 // import {Component} from 'react'
 
@@ -226,7 +224,7 @@ const singles = Helper.makeTrackOf('single')([
         ],
         external: [{
             title: "P.S.",
-            content: ["这首单曲还是19年的第二季的OP，啊真香", "但是官网说隔壁PP'P的12单也是OP，总不会是打字错误吧（划去）"]
+            content: ["这首单曲还是19年的第二季的OP，啊真香", "但是官网说隔壁PP'P的12单也是OP，总不会是打字错误吧（划去）", "专辑封面迟迟没有更新，于是这里就放了游戏中CW曲的假封面"]
         }]
     }
 ])
@@ -311,7 +309,7 @@ const siteConfig: Helper.SiteConfig = {
         }
     },
     plugins: {
-        single: lazyComponent(RoseliaLyrics)
+        single: asyncComponent(RoseliaLyrics)
     }
 }
 

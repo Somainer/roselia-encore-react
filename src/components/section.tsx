@@ -6,6 +6,7 @@ import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn} f
 import {Link} from 'react-router-dom'
 import {getPositionByNum} from '../rhodonite/protocols/helpers'
 import {lazyImageOf} from '../rhodonite/lazyimage'
+import {LazyComonent} from '../rhodonite/lazycomponent'
 
 type SemanticColumnNum = 1 | 3 | 4
 
@@ -81,8 +82,9 @@ export class EncoreSection extends React.Component<EncoreSectionProps> {
                     </Grid.Row>
                     <Grid.Row columns={this.props.columns}>
                         {this.props.data.map(sc => (
-                            
-                            <EncoreCard {...sc} isDark={this.props.dark} lazyImageSrc={this.props.lazyImageSrc} />
+                            <LazyComonent key={sc.title}>
+                                <EncoreCard {...sc} isDark={this.props.dark} lazyImageSrc={this.props.lazyImageSrc} />
+                            </LazyComonent>
                         ))}
                     </Grid.Row>
                 </Grid>
@@ -163,7 +165,7 @@ export const singleSection = (si: SiteConfig, language: SupportedLanguages) => {
         })),
         lazyImageSrc: si.siteLogo
     }
-    return <EncoreSection {...sectionProps}>{Plugin && <Plugin/>}</EncoreSection>
+    return <EncoreSection {...sectionProps}>{Plugin && <LazyComonent><Plugin/></LazyComonent>}</EncoreSection>
 }
 
 export const albumSection = (si: SiteConfig, language: SupportedLanguages) => {

@@ -1,0 +1,11 @@
+@keyframes rhodonite-fade-in-animate {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.rhodonite-fade-in {
+    animation: rhodonite-fade-in-animate .37s ease-in-out;
+}
+.rhodonite-fade-out {
+    animation: rhodonite-fade-in-animate .37s ease-in-out reverse;
+}

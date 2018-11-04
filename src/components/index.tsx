@@ -9,7 +9,7 @@ import { SiteConfig, SupportedLanguages } from 'src/rhodonite/protocols/encore';
 import { Image, Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {Route, Switch} from 'react-router'
-import {lazyComponent} from '../rhodonite/lazycomponent'
+import {asyncComponent} from '../rhodonite/asynccomponent'
 import {ScrollToTopRouter} from '../rhodonite/component'
 import {RouteComponentProps} from 'react-router'
 import { NotFound } from './notfound';
@@ -72,13 +72,13 @@ export class Index extends React.Component<IndexProps, {}> {
         const StatedRoute = ({component, ...rest}: {component: React.ComponentType, [att: string]: any}) => (
             <ScrollToTopRouter {...rest} render={this.renderComponent(component, rest.eternal)}></ScrollToTopRouter>
           )
-        const LazyMemberPage = lazyComponent(() => import('../components/member').then(p => p.MemberPage))
+        const AsyncMemberPage = asyncComponent(() => import('../components/member').then(p => p.MemberPage))
         const parentPath = this.props.match.path
         return (<div>
             <Switch>
                 <Route exact path={parentPath}>{this.index()}</Route>
                 {/* <Route path="member/:member"></Route> */}
-                <StatedRoute path={parentPath + "member/:member/"} component={LazyMemberPage}></StatedRoute>
+                <StatedRoute path={parentPath + "member/:member/"} component={AsyncMemberPage}></StatedRoute>
                 <StatedRoute path={parentPath + "single/:trackId/"} component={SingleTrackPage}></StatedRoute>
                 {this.props.siteConfig.albums && (
                     <StatedRoute path={parentPath + "album/:trackId/"} component={AlbumTrackPage}></StatedRoute>

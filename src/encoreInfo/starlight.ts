@@ -48,7 +48,19 @@ const members = Helper.makeMembers([
             en: "Tomita Maho",
             cn: "富田麻帆",
             jp: "富田麻帆"
-        }
+        },
+        external: [
+            {
+                title: 'THIS IS 标题',
+                content: 'THIS IS 内容',
+                hidden: false
+            },
+            {
+                title: 'This is...',
+                content: 'This is 天堂口合口合',
+                hidden: true
+            }
+        ]
         
     },
     {

@@ -1,37 +1,67 @@
 import * as React from 'react'
-import { Loader } from 'semantic-ui-react'
-import * as NProgress from 'nprogress'
+import {Placeholder, Visibility} from 'semantic-ui-react'
+import './lazycomponent.css'
 
-export function lazyComponent<T extends React.ComponentClass<any>>(comp: Promise<T> | (() => Promise<T>)) {
-    return class LazyComponent extends React.Component<any, {plugin?: T}> {
-        private static cachedComponent?: T = undefined
-        public constructor (props: any) {
-            super(props)
-            this.state = {
-                plugin: undefined
-            }
-        }
-        public componentWillMount () {
-            if (LazyComponent.cachedComponent) {
-                this.setState({
-                    plugin: LazyComponent.cachedComponent
-                })
-            } else {
-                const promise = (typeof comp === 'function') ? comp() : comp
-                NProgress.start()
-                promise.then(c => {
-                    LazyComponent.cachedComponent = c
-                    this.setState({
-                        plugin: c
-                    })
-                }).then(() => NProgress.done())
-            }
-        }
-        public render () {
-            const Plugin: undefined | React.ComponentClass<any> = this.state.plugin
-            return Plugin ? (<Plugin {...this.props}></Plugin>) : (
-                <Loader active inline='centered' />
-            )
+
+interface LazyComonentState {
+    visible: boolean
+}
+
+
+interface LazyComonentProps {
+    placeHolder?: (() => JSX.Element | React.ReactNode) | JSX.Element | React.ReactNode
+    [ext: string]: any
+}
+
+
+export class LazyComonent extends React.Component<LazyComonentProps, LazyComonentState> {
+    public constructor(props: LazyComonentProps) {
+        super(props)
+        this.state = {
+            visible: false
         }
     }
+    private setVisible = () => {
+        this.setState({
+            visible: true
+        })
+    }
+    public shouldComponentUpdate () {
+        return this.state.visible
+    }
+    private getPlaceHolder () {
+        const {placeHolder} = this.props
+        if (placeHolder) {
+            if(placeHolder instanceof Function) {
+                return placeHolder()
+            }
+            return placeHolder
+        }
+        return (
+            <Placeholder>
+                <Placeholder.Paragraph></Placeholder.Paragraph>
+            </Placeholder>
+        )
+    }
+    private listener () {
+        return (
+            <Visibility once onTopVisible={this.setVisible} onBottomVisible={this.setVisible}></Visibility>
+        )
+    }
+    public renderChildren () {
+        return (
+            <div className="rhodonite-fade-in">
+                {this.props.children}
+            </div>
+        )
+    }
+    public render() {
+        return this.state.visible ? this.props.children : (
+            <div>
+                {this.listener()}
+                {this.getPlaceHolder()}
+            </div>
+        )
+    }
+
 }

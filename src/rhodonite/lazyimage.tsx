@@ -1,5 +1,6 @@
 import * as React from 'react'
-import {Image, Visibility, Placeholder} from 'semantic-ui-react'
+import {Image, Placeholder} from 'semantic-ui-react'
+import {LazyComonent} from './lazycomponent'
 
 export interface LazyImageProps {
     src: string,
@@ -7,19 +8,12 @@ export interface LazyImageProps {
     [external: string]: any
 }
 
-export class LazyImage extends React.Component<LazyImageProps, {loaded: boolean, visible: boolean}> {
+export class LazyImage extends React.Component<LazyImageProps, {loaded: boolean}> {
     public constructor(props: LazyImageProps) {
         super(props)
         this.state = {
-            loaded: false,
-            visible: false
+            loaded: false
         }
-    }
-
-    public setVisible = () => {
-        this.setState({
-            visible: true
-        })
     }
 
     public setLoaded = () => {
@@ -28,15 +22,11 @@ export class LazyImage extends React.Component<LazyImageProps, {loaded: boolean,
         })
     }
 
-    public shouldComponentUpdate() {
-        return this.state.visible
-    }
-
     private placeHolderImage (withImage: boolean) {
         const {src, lazySrc, ...rest} = this.props
         return (<div>
             {this.props.lazySrc ? (
-                <Image src={lazySrc} {...rest}></Image>
+                <Image className="rhodonite-fade-out" src={lazySrc} {...rest}></Image>
             ) : (
                 <Placeholder>
                     <Placeholder.Image></Placeholder.Image>
@@ -48,15 +38,21 @@ export class LazyImage extends React.Component<LazyImageProps, {loaded: boolean,
     
     private imageContent() {
         const {src, lazySrc, ...rest} = this.props
-        return this.state.visible ? (
-            this.state.loaded ? <Image src={src} {...rest}></Image>
-            : this.placeHolderImage(true)
-        ) : (
-            <div>
-                <Visibility once onTopVisible={this.setVisible} onBottomVisible={this.setVisible}></Visibility>
-                {this.placeHolderImage(false)}
-            </div>
+        return (
+            <LazyComonent placeHolder={this.placeHolderImage(false)}>
+                {this.state.loaded ? <Image className="rhodonite-fade-in" src={src} {...rest}></Image>
+                : this.placeHolderImage(true)}
+            </LazyComonent>
         )
+        // return this.state.visible ? (
+        //     this.state.loaded ? <Image src={src} {...rest}></Image>
+        //     : this.placeHolderImage(true)
+        // ) : (
+        //     <div>
+        //         <Visibility once onTopVisible={this.setVisible} onBottomVisible={this.setVisible}></Visibility>
+        //         {this.placeHolderImage(false)}
+        //     </div>
+        // )
 
     }
 

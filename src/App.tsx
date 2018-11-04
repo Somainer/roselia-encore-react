@@ -17,7 +17,7 @@ import {footer} from './components/footer'
 import {Route, RouteComponentProps, Switch} from 'react-router'
 import {BrowserRouter} from 'react-router-dom'
 import {ScrollToTopRouter} from './rhodonite/component'
-import {lazyComponent} from './rhodonite/lazycomponent'
+import { asyncComponent } from "./rhodonite/asynccomponent";
 import {CSSTransition} from 'react-transition-group'
 
 // import * as NProgress from 'nprogress'
@@ -50,7 +50,7 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
   // private renderIndex() {
   //   return () => {
   //     // return import('./components/index').then(({Index}) => (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>))
-  //     return React.createElement(lazyComponent(() => import('./components/index').then(x => x.Index)), this.state)
+  //     return React.createElement(asyncComponent(() => import('./components/index').then(x => x.Index)), this.state)
   //     // return (<Index siteConfig={this.state.siteConfig} language={this.state.language}></Index>)
   //   }
   // }
@@ -75,8 +75,8 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
         // return <Redirect to="/"></Redirect>
       }
     
-      // const LazyMemberPage = lazyComponent(() => import('./components/member').then(p => p.MemberPage))
-      const LazyIndex = lazyComponent(() => import('./components/index').then(x => x.Index))
+      // const LazyMemberPage = asyncComponent(() => import('./components/member').then(p => p.MemberPage))
+      const LazyIndex = asyncComponent(() => import('./components/index').then(x => x.Index))
       const navBarProps = {
         playerUrl: site.playerUrl,
         favicon: site.siteFavicon,
