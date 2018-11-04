@@ -3,7 +3,7 @@ import * as Protocol from '../rhodonite/protocols/encore'
 import * as Helpers from '../rhodonite/protocols/helpers'
 import {RouteComponentProps} from 'react-router'
 import {HiddenText, IndentText, optionalBoolean} from './member'
-import {Header, Container, Segment, Divider, Grid} from 'semantic-ui-react'
+import {Header, Container, Segment, Divider, Grid, Label} from 'semantic-ui-react'
 import { NotFound } from './notfound';
 import { TitledDocument } from 'src/rhodonite/component';
 import {lazyImageOf} from '../rhodonite/lazyimage'
@@ -21,6 +21,7 @@ interface TrackPageProps extends RouteComponentProps<TrackLocationProps> {
 const {getPositionByNum} = Helpers
 
 class TrackPage extends React.Component<TrackPageProps> {
+    private cachedTrack: Protocol.TrackInfo | undefined = undefined
     protected getCurrentTrack (): Protocol.TrackInfo | undefined {
         return undefined // Should be overloaded
     }
@@ -42,13 +43,35 @@ class TrackPage extends React.Component<TrackPageProps> {
     }
 
     private get track () {
-        return this.getCurrentTrack()!
+        if (this.cachedTrack) return this.cachedTrack
+        return this.cachedTrack = this.getCurrentTrack()!
     }
     private hasValidTrack () {
         return !!this.track
     }
     private getContextText(ctx: Protocol.MultiLanguageAttribute | string) {
         return Helpers.getLanguageAttribute(ctx, this.props.language)
+    }
+
+    private get calendarIconClass() {
+        try{
+            const date = new Date(this.track.releaseDate)
+            const today = new Date
+            if (Helpers.sameDate(today, true)(date)) return 'calendar alternate outline'
+            if (date > today) return 'calendar plus outline'
+            return 'calendar check outline'
+        } catch {
+            return 'calendar outline'
+        }
+        
+    }
+
+    private get localReleaseDate () {
+        try {
+            return (new Date(this.track.releaseDate)).toLocaleDateString()
+        } catch {
+            return this.track.releaseDate
+        }
     }
     
     private introLayout () {
@@ -74,8 +97,9 @@ class TrackPage extends React.Component<TrackPageProps> {
                     marginTop: '1.5em'
                 }}
                 >
-                    {track.displayId ? track.displayId : `${track.id}${getPositionByNum(track.id)}${Helpers.capatialize(track.type||'')}`}@{track.releaseDate}
+                    {track.displayId ? track.displayId : `${track.id}${getPositionByNum(track.id)} ${Helpers.capatialize(track.type||'')}`}
                 </Header>
+                <Label size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>
             </div>
         )
     }
@@ -119,7 +143,7 @@ class TrackPage extends React.Component<TrackPageProps> {
                             
                         </AttrWithTitle> 
                         {track.external && track.external.map(ex => (
-                            <AttrWithTitle header={ex.title}>
+                            <AttrWithTitle key={ex.title} header={ex.title}>
                                 {(ex.content instanceof Array) ? (
                                     <ul>
                                         {ex.content.map((e, idx) => (

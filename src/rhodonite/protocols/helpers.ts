@@ -73,6 +73,14 @@ export function sameDate (originDate?: Date, exact: boolean=false) {
     }
 }
 
+export function dummySameDate(origin: Date|string, target: string | Date, exact: boolean=false) {
+    try {
+        return sameDate(new Date(origin), exact)(target)
+    } catch {
+        return false
+    }
+}
+
 export function makeCompareOn<T, U> (key: (t: T) => U, comparer: (u: U) => boolean) {
     return (t: T) => comparer(key(t))
 }

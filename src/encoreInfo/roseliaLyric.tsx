@@ -3,6 +3,7 @@ import {TrackType} from '../rhodonite/protocols/encore'
 import {Item, Button, Segment, Dimmer, Label} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import {getPositionByNum} from '../rhodonite/protocols/helpers'
+import {LazyComonent} from '../rhodonite/lazycomponent'
 
 interface RandomLyric {
     album: string
@@ -17,7 +18,12 @@ interface RandomLyric {
     picUrl: string
 }
 
-export class RoseliaLyrics extends React.Component<{}, {lyric: RandomLyric, loading: boolean}> {
+interface RoseliaLyricsState {
+    lyric: RandomLyric
+    loading: boolean
+}
+
+export class RoseliaLyrics extends React.Component<{}, RoseliaLyricsState> {
     constructor (props: object) {
         super(props)
         this.state = {
@@ -36,7 +42,9 @@ export class RoseliaLyrics extends React.Component<{}, {lyric: RandomLyric, load
             loading: false
         }
     }
-
+    public shouldComponentUpdate(newState: RoseliaLyricsState) {
+        return newState.loading !== this.state.loading || newState.lyric.name !== this.state.lyric.name || newState.lyric.at !== this.state.lyric.at
+    }
     private getLyric = async () => {
         this.setState({
             loading: true
@@ -54,16 +62,13 @@ export class RoseliaLyrics extends React.Component<{}, {lyric: RandomLyric, load
             })
         }
     }
-    public componentDidMount () {
-        this.getLyric()
-    }
 
     private get currentLink () {
         const lyric = this.state.lyric
         return `${lyric.type}/${lyric.id}${getPositionByNum(lyric.id)}`
     }
 
-    public render() {
+    private renderContent() {
         const lyric = this.state.lyric
         return (
             <Dimmer.Dimmable as={Segment} blurring dimmed={this.state.loading}>
@@ -87,6 +92,12 @@ export class RoseliaLyrics extends React.Component<{}, {lyric: RandomLyric, load
                     </Item>
                 </Item.Group>
             </Dimmer.Dimmable>
+        )
+    }
+
+    public render() {
+        return (
+            <LazyComonent onVisible={this.getLyric}>{this.renderContent()}</LazyComonent>
         )
     }
 }

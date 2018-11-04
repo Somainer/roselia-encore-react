@@ -10,6 +10,7 @@ interface LazyComonentState {
 
 interface LazyComonentProps {
     placeHolder?: (() => JSX.Element | React.ReactNode) | JSX.Element | React.ReactNode
+    onVisible?: () => void
     [ext: string]: any
 }
 
@@ -22,6 +23,7 @@ export class LazyComonent extends React.Component<LazyComonentProps, LazyComonen
         }
     }
     private setVisible = () => {
+        if(this.props.onVisible) this.props.onVisible()
         this.setState({
             visible: true
         })

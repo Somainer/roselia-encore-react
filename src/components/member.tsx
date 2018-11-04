@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as Protocol from '../rhodonite/protocols/encore'
 import * as Helpers from '../rhodonite/protocols/helpers'
-import {Container, Header, Segment, Grid, Divider} from 'semantic-ui-react'
+import {Container, Header, Segment, Grid, Divider, Label} from 'semantic-ui-react'
 import {RouteComponentProps} from 'react-router'
 import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers'
 import { TitledDocument } from 'src/rhodonite/component';
@@ -71,6 +71,9 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
     private get memberFound () {
         return !!this.getCurrentMember()
     }
+    private get isInBirthday() {
+        return Helpers.dummySameDate(new Date, this.member.birthday)
+    }
     private memberLayout = () => {
         const member = this.member
         return (
@@ -98,6 +101,11 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                 >
                     {this.getContextText(Helpers.mergeLanguageAttribute(member.CVName))}
                 </Header>
+                {this.isInBirthday && <Label size="huge" icon="birthday cake" content={this.getContextText({
+                    cn: '生日快乐',
+                    en: 'Happy Birthday',
+                    jp: 'お誕生日おめでとう'
+                })}/>}
             </div>
         )
     }
