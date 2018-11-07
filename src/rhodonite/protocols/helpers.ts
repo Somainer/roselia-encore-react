@@ -10,6 +10,10 @@ import {
 } from './encore'
 
 export class BilibiliVideoAdapter implements RecommandVideoAdapter {
+    public videos: RecommandVideo
+    public constructor(videos: RecommandVideo) {
+        this.videos = videos
+    }
     public source = 'Bilibili'
     public getLink (aid: string) {
         return `https://www.bilibili.com/video/av${aid}`

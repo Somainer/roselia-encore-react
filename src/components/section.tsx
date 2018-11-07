@@ -10,7 +10,7 @@ import {LazyComonent} from '../rhodonite/lazycomponent'
 
 type SemanticColumnNum = 1 | 3 | 4
 
-interface EncoreSectionProps {
+export interface EncoreSectionProps {
     title: string
     columns: SemanticColumnNum,
     data: SectionCard[],
@@ -27,23 +27,27 @@ interface SectionCard {
     meta?: string,
     description?: string
     isDark?: boolean,
-    lazyImageSrc?: string
+    lazyImageSrc?: string,
+    isOuterLink?: boolean
+    onClick?: () => void
 }
 
 function positionWithNumByNum (num: number) {
     return `${num}${getPositionByNum(num)}`
 }
 
-const EncoreCard = (sc: SectionCard) => {
+export const EncoreCard = (sc: SectionCard) => {
+    const linkRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
+    const isOuterLink = (typeof sc.isOuterLink === 'undefined') ? (sc.link && linkRegex.test(sc.link)) : sc.isOuterLink
     const linkProps = (sc.link ? {
-        as: Link,
-        to: sc.link
+        as: isOuterLink ? 'a' : Link,
+        [isOuterLink ? 'href' : 'to']: sc.link
     } : {})
     const LazyImage = lazyImageOf(sc.lazyImageSrc)
     return (
     <Grid.Column key={sc.title}>
         <div className="thumbnail">
-            <Card link {...linkProps} fluid style={{backgroundColor: sc.color}}>
+            <Card link {...linkProps} fluid style={{backgroundColor: sc.color}} onClick={sc.onClick}>
                 {sc.secondaryImage ? (
                     <Reveal animated='move'>
                         <Reveal.Content visible>

@@ -90,11 +90,25 @@ const members = Helper.makeMembers([
         bloodType: "O",
         horoscope: "天秤",
         encoreColor: "#bbbbbb",
-        CVName: {
-            en: "Akesaka Satomi",
-            cn: "明坂聪美",
-            jp: "明坂聡美"
-        }
+        CVName: [
+            {
+                en: "Akesaka Satomi",
+                cn: "明坂聪美",
+                jp: "明坂聡美"
+            },
+            {
+                en: 'Shizaki Kanon',
+                cn: '志崎桦音',
+                jp: '志崎樺音'
+            }
+        ],
+        external: [
+            {
+                title: '',
+                hidden: false,
+                content: 'twitter关注数1小时破万祝贺！'
+            }
+        ]
     }
 ])
 
@@ -103,7 +117,7 @@ const singles = Helper.makeTrackOf('single')([
         id: 1,
         title: "BLACK SHOUT",
         track: ["BLACK SHOUT", "LOUDER", "BLACK SHOUT -instrumental- ", "LOUDER -instrumental- ", "Roseliaミニドラマ～バンド練習編～ "],
-        releaseDate: "2017-4-19",
+        releaseDate: "2017/4/19",
         links: [
             {
                 description: "BanG Dream",
@@ -124,7 +138,7 @@ const singles = Helper.makeTrackOf('single')([
         id: 2,
         title: "Re:birth day",
         track: ["Re:birth day", "陽だまりロードナイト", "Re:birth day -instrumental- ", "陽だまりロードナイト -instrumental- ", "Roselia ミニドラマ～ふれあい動物編～ "],
-        releaseDate: "2017-6-28",
+        releaseDate: "2017/6/28",
         links: [
             {
                 description: "BanG Dream",
@@ -141,7 +155,7 @@ const singles = Helper.makeTrackOf('single')([
         id: 3,
         title: "熱色スターマイン",
         track: ["熱色スターマイン", "－HEROIC ADVENT－", "熱色スターマイン -instrumental- ", "－HEROIC ADVENT－ -instrumental- ", "Roseliaミニドラマ～あこの厨二語辞典編～ "],
-        releaseDate: "2017-8-30",
+        releaseDate: "2017/8/30",
         links: [
             {
                 description: "BanG Dream",
@@ -157,7 +171,7 @@ const singles = Helper.makeTrackOf('single')([
         id: 4,
         title: "ONENESS",
         track: ["ONENESS", "Determination Symphony", "ONENESS -instrumental- ", "Determination Symphony -instrumental- "],
-        releaseDate: "2017-11-29",
+        releaseDate: "2017/11/29",
         links: [
             {
                 description: "BanG Dream",
@@ -174,7 +188,7 @@ const singles = Helper.makeTrackOf('single')([
         id: 5,
         title: "Opera of the wasteland",
         track: ["Opera of the wasteland", "軌跡", "Opera of the wasteland -instrumental- ", "軌跡 -instrumental- "],
-        releaseDate: "2018-3-21",
+        releaseDate: "2018/3/21",
         links: [
             {
                 description: "BanG Dream",
@@ -224,8 +238,9 @@ const singles = Helper.makeTrackOf('single')([
         ],
         external: [{
             title: "P.S.",
-            content: ["这首单曲还是19年的第二季的OP，啊真香", "但是官网说隔壁PP'P的12单也是OP，总不会是打字错误吧（划去）", "专辑封面迟迟没有更新，于是这里就放了游戏中CW曲的假封面"]
-        }]
+            content: ["这首单曲还是19年的第二季的OP，啊真香", "但是官网说隔壁PP'P的12单也是OP，总不会是打字错误吧（划去）"]
+        }],
+        hasLimitedEdition: true
     }
 ])
 
@@ -310,7 +325,8 @@ const siteConfig: Helper.SiteConfig = {
     },
     plugins: {
         single: asyncComponent(RoseliaLyrics)
-    }
+    },
+    videos: require('./roseliaRecommandVideo.json').map((x: any) => new Helper.BilibiliVideoAdapter(x))
 }
 
 export default siteConfig

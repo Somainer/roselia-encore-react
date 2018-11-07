@@ -14,6 +14,8 @@ import {ScrollToTopRouter} from '../rhodonite/component'
 import {RouteComponentProps} from 'react-router'
 import { NotFound } from './notfound';
 import { SingleTrackPage, AlbumTrackPage, customTrackPage } from './track'
+import {VideoSection} from './video'
+import {LazyComonent} from '../rhodonite/lazycomponent'
 
 interface IndexProps extends RouteComponentProps<{}> {
     siteConfig: SiteConfig
@@ -60,10 +62,17 @@ export class Index extends React.Component<IndexProps, {}> {
                     <Link to="/starlight/"><Button positive={site.configName === 'starlight'}>Revue Starlight</Button></Link>
                     </Button.Group>
                 </header>
-                {memberSection(site, this.props.language)}
-                {singleSection(site, this.props.language)}
-                {site.albums && albumSection(site, this.props.language)}
-                {site.externalTrackLists && site.externalTrackLists.map(et => generalSection(et, site, this.props.language))}
+                <LazyComonent>
+                    {memberSection(site, this.props.language)}
+                </LazyComonent>
+                <LazyComonent>
+                    {singleSection(site, this.props.language)}
+                    {site.albums && albumSection(site, this.props.language)}
+                    {site.externalTrackLists && site.externalTrackLists.map(et => generalSection(et, site, this.props.language))}
+                </LazyComonent>
+                <LazyComonent>
+                    {site.videos && <VideoSection siteConfig={site} videos={site.videos} indexPage={this.props.match.path}></VideoSection>}
+                </LazyComonent>
             </div>
         )
     }

@@ -109,7 +109,7 @@ export interface SiteConfig {
     singles: TrackInfo[]
     albums?: TrackInfo[]
     covers?: TrackInfo[]
-    videos?: RecommandVideoAdapter | RecommandVideoAdapter[]
+    videos?: RecommandVideoAdapter[]
     themeColor: string
     bannerImage: BannerImageConfig,
     getters: SiteImageGetter,

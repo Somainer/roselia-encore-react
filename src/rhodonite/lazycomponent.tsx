@@ -50,13 +50,6 @@ export class LazyComonent extends React.Component<LazyComonentProps, LazyComonen
             <Visibility once onTopVisible={this.setVisible} onBottomVisible={this.setVisible}></Visibility>
         )
     }
-    public renderChildren () {
-        return (
-            <div className="rhodonite-fade-in">
-                {this.props.children}
-            </div>
-        )
-    }
     public render() {
         return this.state.visible ? this.props.children : (
             <div>
