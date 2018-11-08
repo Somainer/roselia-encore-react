@@ -71,7 +71,7 @@ export class Index extends React.Component<IndexProps, {}> {
                     {site.externalTrackLists && site.externalTrackLists.map(et => generalSection(et, site, this.props.language))}
                 </LazyComonent>
                 <LazyComonent>
-                    {site.videos && <VideoSection siteConfig={site} videos={site.videos} indexPage={this.props.match.path}></VideoSection>}
+                    {site.videos ? <VideoSection siteConfig={site} videos={site.videos} indexPage={this.props.match.path}></VideoSection> : null}
                 </LazyComonent>
             </div>
         )
