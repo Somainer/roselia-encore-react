@@ -238,7 +238,7 @@ const singles = Helper.makeTrackOf('single')([
         ],
         external: [{
             title: "P.S.",
-            content: ["这首单曲还是19年的第二季的OP，啊真香", "但是官网说隔壁PP'P的12单也是OP，总不会是打字错误吧（划去）"]
+            content: ["这首单曲还是19年的第二季的OP，啊真香", "双OP好评"]
         }],
         hasLimitedEdition: true
     }
@@ -326,7 +326,44 @@ const siteConfig: Helper.SiteConfig = {
     plugins: {
         single: asyncComponent(RoseliaLyrics)
     },
-    videos: require('./roseliaRecommandVideo.json').map((x: any) => new Helper.BilibiliVideoAdapter(x))
+    videos: require('./roseliaRecommandVideo.json').map((x: any) => new Helper.BilibiliVideoAdapter(x)),
+    bangumiList: [
+        {
+            name: "BanG Dream! TV",
+            coverImage: '/img/bangumi/bd1st.jpg',
+            releaseDate: '2017/1/21',
+            link: 'https://www.bilibili.com/bangumi/media/md5807',
+            meta: '话说每集的题目真是不得了啊'
+        },
+        {
+            name: 'BanG Dream! OVA',
+            coverImage: '/img/bangumi/bd1st.jpg',
+            releaseDate: '2017/8/20',
+            link: 'https://www.bilibili.com/bangumi/media/md6398',
+            meta: ''
+        },
+        {
+            name: 'BanG Dream! 少女乐团派对☆PICO',
+            coverImage: '/img/bangumi/bdpico.png',
+            releaseDate: '2018/7/5',
+            link: 'https://www.bilibili.com/bangumi/media/md135252/',
+            meta: '我最爱的沙雕小动画！'
+        },
+        {
+            name: 'BanG Dream! 2nd Season',
+            coverImage: '/img/bangumi/bd2nd.jpg',
+            releaseDate: '2019/1/1',
+            link: 'https://anime.bang-dream.com/2nd/',
+            meta: 'Main Visual就用了3D是怎么回事？'
+        },
+        {
+            name: 'BanG Dream! 3rd Season',
+            coverImage: '/img/bangumi/bd2nd.jpg',
+            releaseDate: '2019/10/1',
+            link: '',
+            meta: ''
+        }
+    ]
 }
 
 export default siteConfig

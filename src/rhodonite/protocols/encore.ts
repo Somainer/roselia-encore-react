@@ -99,6 +99,14 @@ export interface ExternalTrackList {
     trackList: TrackInfo[]
 }
 
+export interface BangumiItem {
+    name: string
+    link: string
+    coverImage: string
+    releaseDate: string
+    meta?: string
+}
+
 export interface SiteConfig {
     configName: string
     playerUrl?: string
@@ -115,5 +123,6 @@ export interface SiteConfig {
     getters: SiteImageGetter,
     plugins: SitePlugins,
     externalTrackLists?: ExternalTrackList[]
+    bangumiList?: BangumiItem[]
     [attr: string]: any
 }

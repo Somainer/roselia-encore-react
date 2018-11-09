@@ -388,7 +388,16 @@ const siteConfig: Helper.SiteConfig = {
                 }
             ]
         }
-    ])
+    ]),
+    bangumiList: [
+        {
+            name: "少女☆歌剧 Revue Starlight",
+            coverImage: '/img/starlight/bangumi/rs1st.jpg',
+            releaseDate: '2018/7/13',
+            link: 'https://www.bilibili.com/bangumi/media/md102892/',
+            meta: '太扭曲了，我喜欢（建议再看舞台剧）'
+        }
+    ]
 }
 
 export default siteConfig

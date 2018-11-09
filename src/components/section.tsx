@@ -41,7 +41,8 @@ export const EncoreCard = (sc: SectionCard) => {
     const isOuterLink = (typeof sc.isOuterLink === 'undefined') ? (sc.link && linkRegex.test(sc.link)) : sc.isOuterLink
     const linkProps = (sc.link ? {
         as: isOuterLink ? 'a' : Link,
-        [isOuterLink ? 'href' : 'to']: sc.link
+        [isOuterLink ? 'href' : 'to']: sc.link,
+        target: isOuterLink ? '_blank' : undefined
     } : {})
     const LazyImage = lazyImageOf(sc.lazyImageSrc)
     return (
