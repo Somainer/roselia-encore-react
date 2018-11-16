@@ -20,6 +20,15 @@ const members = Helper.makeMembers([
         bloodType: 'A',
         horoscope: "天蝎",
         encoreColor: "#890f87", //"#c67cb5",
+        cvPicNum: 2,
+        external: [
+            {
+                title: '',
+                hidden: true,
+                content: '这只企鹅又能唱歌，又能摔跤，还能revue真厉害'
+            }
+        ],
+        memberPicNum: 3
     },
     {
         name: {
@@ -36,7 +45,9 @@ const members = Helper.makeMembers([
         role: "Gt",
         bloodType: "AB",
         horoscope: "双鱼",
-        encoreColor: "#00aabc"
+        encoreColor: "#00aabc",
+        cvPicNum: 2,
+        memberPicNum: 3
     },
     {
         name: {
@@ -60,7 +71,8 @@ const members = Helper.makeMembers([
                 cn: "中岛由贵",
                 jp: "中島由貴"
             }
-        ]
+        ],
+        memberPicNum: 3
     },
     {
         name: {
@@ -77,7 +89,8 @@ const members = Helper.makeMembers([
             en: "Sakuragawa Megu",
             cn: "樱川惠",
             jp: "桜川めぐ"
-        }
+        },
+        memberPicNum: 3
     },
     {
         name: {
@@ -108,7 +121,8 @@ const members = Helper.makeMembers([
                 hidden: false,
                 content: 'twitter关注数1小时破万祝贺！'
             }
-        ]
+        ],
+        memberPicNum: 3
     }
 ])
 
@@ -317,10 +331,14 @@ const siteConfig: Helper.SiteConfig = {
             return `/img/${Helper.capatialize(t.type!)}_${t.id}_lim.jpg`
         },
         memberImageGetter (m) {
-            return `/img/member_${m.name.en.split(' ')[1].toLowerCase()}.jpg`
+            return `/img/member_${m.name.en.split(' ')[1].toLowerCase()}${
+                Helper.compose(Helper.randomGenerate, n => n ? n.toString() : '')(m.memberPicNum || 0)
+            }.jpg`
         },
         cvImageGetter (m) {
-            return `/img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}.jpg`
+            return `/img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}${
+                Helper.compose(Helper.randomGenerate, n => n ? n.toString() : '')(m.cvPicNum || 0)
+            }.jpg`
         }
     },
     plugins: {

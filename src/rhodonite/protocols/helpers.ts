@@ -103,6 +103,19 @@ export function makeExternalTrackList (etl: ExternalTrackList | ExternalTrackLis
     }
 }
 
+export function compose<T, U, V>(a: (t: T) => U, b: (u: U) => V) {
+    return (t: T) => b(a(t))
+}
+
+export function randomGenerate(from: number, to?: number): number { // Generate random number from [from, to)
+    if (typeof to === 'undefined') return randomGenerate(0, from)
+    return Math.floor(Math.random() * (to - from)) + from
+}
+
+export function randomPickFrom<T>(fromArray: T[]) {
+    return fromArray[randomGenerate(fromArray.length)]
+}
+
 export function getPositionByNum (x: number) {
     if (x > 10 && x < 20) return 'th'
     return ['st', 'nd', 'rd'][(x % 10) - 1] || 'th'
