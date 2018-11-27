@@ -122,7 +122,8 @@ const members = Helper.makeMembers([
                 content: 'twitter关注数1小时破万祝贺！'
             }
         ],
-        memberPicNum: 3
+        memberPicNum: 3,
+        cvPicNum: 2
     }
 ])
 
