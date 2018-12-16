@@ -249,6 +249,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "BanG Dream",
                 link: "https://bang-dream.com/discographies/633"
+            },
+            {
+                description: "NetEase",
+                link: "https://music.163.com/album?id=74858139"
             }
         ],
         external: [{
