@@ -1,6 +1,6 @@
 {
   "name": "roselia-encore-react",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": true,
   "dependencies": {
     "@types/nprogress": "0.0.29",

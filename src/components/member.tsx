@@ -9,6 +9,7 @@ import { TitledDocument } from 'src/rhodonite/component';
 import selfish from '../rhodonite/utils/selfish'
 import { NotFound } from './notfound';
 import {lazyImageOf} from '../rhodonite/lazyimage'
+import { TargetLink } from 'src/rhodonite/smartLink';
 
 const notFoundMember: Protocol.MemberInfo = {
     name: {
@@ -149,7 +150,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
             
         ) : (<div></div>)
         const WikiLink = (wikiName: string, generator: (s: string) => string) => ({wiki, as}: {wiki: string, as?: any}) => (
-            React.createElement(as||'p', null, <a href={generator(wiki)}>{wikiName}({wiki})</a>)
+            React.createElement(as||'p', null, <TargetLink link={generator(wiki)}>{wiki}({wikiName})</TargetLink>)
         )
         const MoegirlLink = WikiLink('萌娘百科', s => `https://zh.moegirl.org/${s}`)
         const LazyImage = lazyImageOf(this.props.siteConfig.siteLogo)

@@ -260,6 +260,32 @@ const singles = Helper.makeTrackOf('single')([
             content: ["这首单曲还是19年的第二季的OP，啊真香", "双OP好评"]
         }],
         hasLimitedEdition: true
+    },
+    {
+        id: 8,
+        title: "Safe and Sound",
+        track: ["Safe and Sound", "PASSIONATE ANTHEM", "Safe and Sound -instrumental-", "PASSIONATE ANTHEM -instrumental-"],
+        releaseDate: "2019/2/20",
+        links: [
+            {
+                description: "BanG Dream",
+                link: "https://bang-dream.com/discographies/739"
+            }
+        ],
+        external: [
+            {
+                title: "快住手！",
+                content: [
+                    "2月20号7CD10BD，我的钱包要空了。",
+                    "My wallet is not safe and sound."
+                ]
+            },
+            {
+                title: '封面',
+                content: '目前暂时将游戏假封面作为专辑封面',
+                hidden: false
+            }
+        ]
     }
 ])
 

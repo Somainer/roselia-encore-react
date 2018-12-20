@@ -3,10 +3,10 @@ import {Grid, Image, Container, Card, Header, Reveal} from 'semantic-ui-react'
 import './encore.css'
 import {SupportedLanguages, MultiLanguageAttribute, SiteConfig, ExternalTrackList} from '../rhodonite/protocols/encore'
 import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn} from '../rhodonite/protocols/helpers'
-import {Link} from 'react-router-dom'
 import {getPositionByNum} from '../rhodonite/protocols/helpers'
 import {lazyImageOf} from '../rhodonite/lazyimage'
 import {LazyComonent} from '../rhodonite/lazycomponent'
+import {TargetLink} from '../rhodonite/smartLink'
 
 type SemanticColumnNum = 1 | 3 | 4
 
@@ -37,13 +37,7 @@ function positionWithNumByNum (num: number) {
 }
 
 export const EncoreCard = (sc: SectionCard) => {
-    const linkRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-    const isOuterLink = (typeof sc.isOuterLink === 'undefined') ? (sc.link && linkRegex.test(sc.link)) : sc.isOuterLink
-    const linkProps = (sc.link ? {
-        as: isOuterLink ? 'a' : Link,
-        [isOuterLink ? 'href' : 'to']: sc.link,
-        target: isOuterLink ? '_blank' : undefined
-    } : {})
+    const linkProps = (new TargetLink(sc)).semanticProps
     const LazyImage = lazyImageOf(sc.lazyImageSrc)
     return (
     <Grid.Column key={sc.title}>

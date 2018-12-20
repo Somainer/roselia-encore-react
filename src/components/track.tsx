@@ -7,6 +7,7 @@ import {Header, Container, Segment, Divider, Grid, Label} from 'semantic-ui-reac
 import { NotFound } from './notfound';
 import { TitledDocument } from 'src/rhodonite/component';
 import {lazyImageOf} from '../rhodonite/lazyimage'
+import { TargetLink } from 'src/rhodonite/smartLink';
 // import {cached} from '../rhodonite/utils/property'
 
 interface TrackLocationProps {
@@ -136,7 +137,9 @@ class TrackPage extends React.Component<TrackPageProps> {
                         <AttrWithTitle when={!!track.links} indent={false} header={{cn: "链接", jp:"リンク", en: "Links"}}>
                             <ul>
                                 {track.links && track.links.map((l, i) => (
-                                    <li key={i}><a href={l.link}>{l.description}</a></li>
+                                    <li key={i}>
+                                        <TargetLink link={l.link}>{l.description}</TargetLink>
+                                    </li>
                                 ))}
                             </ul>
                             
