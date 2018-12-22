@@ -3,11 +3,12 @@ import * as Protocol from '../rhodonite/protocols/encore'
 import * as Helpers from '../rhodonite/protocols/helpers'
 import {RouteComponentProps} from 'react-router'
 import {HiddenText, IndentText, optionalBoolean} from './member'
-import {Header, Container, Segment, Divider, Grid, Label} from 'semantic-ui-react'
+import {Header, Container, Segment, Divider, Grid, Label, Popup} from 'semantic-ui-react'
 import { NotFound } from './notfound';
 import { TitledDocument } from 'src/rhodonite/component';
 import {lazyImageOf} from '../rhodonite/lazyimage'
 import { TargetLink } from 'src/rhodonite/smartLink';
+import { NaiveRoseliaiCal } from 'src/rhodonite/utils/naiveical';
 // import {cached} from '../rhodonite/utils/property'
 
 interface TrackLocationProps {
@@ -55,16 +56,34 @@ class TrackPage extends React.Component<TrackPageProps> {
     }
 
     private get calendarIconClass() {
-        try{
+        const released = this.trackReleaseState
+        if (typeof released === 'undefined') return 'calendar outline'
+        if (released > 0) return 'calendar check outline'
+        if (released < 0) return 'calendar plus outline'
+        return 'calendar alternate outline'
+    }
+
+    private get trackReleaseState() {
+        try {
             const date = new Date(this.track.releaseDate)
             const today = new Date
-            if (Helpers.sameDate(today, true)(date)) return 'calendar alternate outline'
-            if (date > today) return 'calendar plus outline'
-            return 'calendar check outline'
+            if (Helpers.sameDate(today, true)(date)) return 0
+            if (date > today) return -1
+            return 1
         } catch {
-            return 'calendar outline'
+            return undefined
         }
-        
+    }
+
+    private downloadICal = () => {
+        const rCal = new NaiveRoseliaiCal()
+        rCal.addTrackRelease(this.track, this.props.language)
+        rCal.getBlogUrl(s => {
+            const link = document.createElement('a')
+            link.href = s
+            link.download = `${this.track.title}.ics`
+            link.click()
+        })
     }
 
     private get localReleaseDate () {
@@ -100,7 +119,17 @@ class TrackPage extends React.Component<TrackPageProps> {
                 >
                     {track.displayId ? track.displayId : `${track.id}${getPositionByNum(track.id)} ${Helpers.capatialize(track.type||'')}`}
                 </Header>
-                <Label size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>
+                {(this.trackReleaseState && this.trackReleaseState < 0) ? (
+                    <Popup trigger={
+                        <Label as="a" color="violet" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}
+                        onClick={this.downloadICal}></Label>
+                    } content={this.getContextText({
+                        en: 'Add to system calendar',
+                        cn: '添加到系统日历',
+                        jp: 'Add to system calendar'
+                    })} />
+                ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>}
+                
             </div>
         )
     }
