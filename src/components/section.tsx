@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Grid, Image, Container, Card, Header, Reveal} from 'semantic-ui-react'
 import './encore.css'
-import {SupportedLanguages, MultiLanguageAttribute, SiteConfig, ExternalTrackList} from '../rhodonite/protocols/encore'
+import {SupportedLanguages, MultiLanguageAttribute, SiteConfig, ExternalTrackList, ExternalLinks} from '../rhodonite/protocols/encore'
 import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn} from '../rhodonite/protocols/helpers'
 import {getPositionByNum} from '../rhodonite/protocols/helpers'
 import {lazyImageOf} from '../rhodonite/lazyimage'
@@ -42,7 +42,7 @@ export const EncoreCard = (sc: SectionCard) => {
     return (
     <Grid.Column key={sc.title}>
         <div className="thumbnail">
-            <Card link {...linkProps} fluid style={{backgroundColor: sc.color}} onClick={sc.onClick}>
+            <Card link {...linkProps} fluid style={{background: sc.color}} onClick={sc.onClick}>
                 {sc.secondaryImage ? (
                     <Reveal animated='move'>
                         <Reveal.Content visible>
@@ -82,7 +82,7 @@ export class EncoreSection extends React.Component<EncoreSectionProps> {
                     <Grid.Row columns={this.props.columns}>
                         {this.props.data.map(sc => (
                             <LazyComonent key={sc.title}>
-                                <EncoreCard {...sc} isDark={this.props.dark} lazyImageSrc={this.props.lazyImageSrc} />
+                                <EncoreCard isDark={this.props.dark} {...sc} lazyImageSrc={this.props.lazyImageSrc} />
                             </LazyComonent>
                         ))}
                     </Grid.Row>
@@ -205,3 +205,27 @@ export const generalSection = (gs: ExternalTrackList, si: SiteConfig, language: 
         lazyImageSrc: si.siteLogo
     }}/>
 }
+
+export const linkSection = (gs: ExternalLinks, language: SupportedLanguages) => (
+    <EncoreSection {...{
+        title: getLanguageAttribute({
+            cn: '相关链接',
+            en: 'Links',
+            jp: 'リンク'
+        }, language),
+        columns: 4,
+        data: [{
+            title: '+我想要友链',
+            link: 'mailto:yukina@roselia.moe',
+            image: '',
+            color: 'linear-gradient(135deg, rgb(114, 82, 201) 15%, #9CD4EA 85%)',
+            isDark: true
+        }].concat(gs.map(t => ({
+            title: t.description,
+            link: t.link,
+            image: '',
+            color: '',
+            isDark: false
+        })))
+    }}></EncoreSection>
+)

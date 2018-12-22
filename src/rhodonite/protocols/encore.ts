@@ -123,6 +123,7 @@ export interface SiteConfig {
     getters: SiteImageGetter,
     plugins: SitePlugins,
     externalTrackLists?: ExternalTrackList[]
-    bangumiList?: BangumiItem[]
+    bangumiList?: BangumiItem[],
+    externalLinks?: ExternalLinks
     [attr: string]: any
 }

@@ -4,7 +4,7 @@ import * as React from 'react'
 // import roselia from '../encoreInfo/roselia'
 
 import {BannerImage} from '../components/banner'
-import {memberSection, singleSection, albumSection, generalSection} from '../components/section'
+import {memberSection, singleSection, albumSection, generalSection, linkSection} from '../components/section'
 import { SiteConfig, SupportedLanguages } from 'src/rhodonite/protocols/encore';
 import { Image, Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
@@ -75,6 +75,11 @@ export class Index extends React.Component<IndexProps, {}> {
                     {site.bangumiList && bangumiSection(site, this.props.language)}
                     {site.videos ? <VideoSection siteConfig={site} videos={site.videos} indexPage={this.props.match.path}></VideoSection> : null}
                 </LazyComonent>
+                {site.externalLinks && (
+                    <LazyComonent>
+                        {linkSection(site.externalLinks, this.props.language)}
+                    </LazyComonent>
+                )}
             </div>
         )
     }

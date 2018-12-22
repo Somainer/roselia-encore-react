@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Menu, Modal, Dropdown, Visibility} from 'semantic-ui-react'
+import {Menu, Dropdown, Visibility, Sidebar, Grid, Segment, Header, Sticky} from 'semantic-ui-react'
 import {LanguageNames, SupportedLanguages} from '../rhodonite/protocols/encore'
 import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers';
 
@@ -14,15 +14,42 @@ interface NavBarConfig {
   indexPath?: string
 }
 
-class PlayerFrame extends React.Component<{link:string}> {
-  constructor(link: string) {
-    super({link})
+class PlayerFrame extends React.Component<{link:string, visible: boolean}, {contextRef: any}> {
+  
+  public state = {
+    contextRef: undefined
   }
+  public renderIFrame() {
+    return <iframe src={this.props.link} frameBorder="no" marginWidth={0} marginHeight={0} width="300" height={450}></iframe>
+  }
+
+  private handleContextRef = (contextRef: any) => this.setState({ contextRef })
+
   public render() {
-    return <iframe src={this.props.link} frameBorder="no" marginWidth={0} marginHeight={0} width={330} height={110}></iframe>
-  }
-  public shouldComponentUpdate() {
-    return false
+    return (
+      <Sidebar.Pushable as={Segment} style={{height: "100vh"}}>
+        <Sidebar animation="push" direction="left" visible={this.props.visible} width="very wide"
+        as={Menu} fixed="bottom">
+          <Grid>
+            <Grid.Row columns={1}>
+              <Grid.Column>
+                <Header as='h3'>Player</Header>
+              </Grid.Column>
+            </Grid.Row>
+            <Sticky context={this.state.contextRef} offset={120}>
+                {this.renderIFrame()}
+            </Sticky>
+            
+          </Grid>
+        </Sidebar>
+        <Sidebar.Pusher dimmed={this.props.visible}>
+          <Segment basic ref={this.handleContextRef}>
+            {this.props.children}
+          </Segment>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
+      
+    )
   }
 }
 
@@ -38,16 +65,16 @@ export class NavBar extends React.Component<NavBarConfig, {opened: boolean, menu
   }
 
   private handleClick = () => {
-    this.setState({
-      opened: true
-    })
+    this.setState(({opened}) => ({
+      opened: !opened
+    }))
   }
 
-  private handleClose = () => {
-    this.setState({
-      opened: false
-    })
-  }
+  // private handleClose = () => {
+  //   this.setState({
+  //     opened: false
+  //   })
+  // }
 
   private languageSetter(lang: SupportedLanguages) {
     return () => {
@@ -112,13 +139,9 @@ export class NavBar extends React.Component<NavBarConfig, {opened: boolean, menu
             </Dropdown>
           </Menu.Menu>
         </Menu>
-        {this.props.playerUrl &&
-        <Modal dimmer="blurring" open={this.state.opened} onClose={this.handleClose}>
-          <Modal.Header>Music Player</Modal.Header>
-          <Modal.Content>
-            <PlayerFrame link={this.props.playerUrl}></PlayerFrame>
-          </Modal.Content>
-        </Modal>
+        {this.props.playerUrl ? (
+            <PlayerFrame link={this.props.playerUrl} visible={this.state.opened}>{this.props.children}</PlayerFrame>
+          ) : this.props.children
         }
       </div>
     )

@@ -329,14 +329,15 @@ const siteConfig: Helper.SiteConfig = {
     externalTrackLists: Helper.makeExternalTrackList([
         {
             displayName: {
-                cn: '翻唱集',
-                en: 'Cover Collection',
-                jp: 'カバーコレクション'
+                cn: 'GBP相关',
+                en: 'Girls Band Party Related',
+                jp: 'ガルパコレクション'
             },
             trackType: 'cover',
             trackList: [
                 {
                     id: 1,
+                    displayId: '1st Cover',
                     title: "バンドリ！ ガールズバンドパーティ！ カバーコレクション Vol.1",
                     track: ["光るなら / Poppin’Party", "千本桜 / Poppin’Party", "アスノヨゾラ哨戒班 / Afterglow", "READY STEADY GO / Afterglow", "secret base ～君がくれたもの～ / Pastel＊Palettes", "ふわふわ時間 / Pastel＊Palettes", "魂のルフラン / Roselia", "ETERNAL BLAZE / Roselia", "いーあるふぁんくらぶ / ハロー、ハッピーワールド！", "ロメオ / ハロー、ハッピーワールド！"],
                     releaseDate: "2018-06-27",
@@ -348,6 +349,24 @@ const siteConfig: Helper.SiteConfig = {
                         {
                             description: "NetEase",
                             link: "http://music.163.com/m/album?id=38272155"
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    displayId: 'Pico',
+                    title: '香澄×蘭×彩×友希那×こころ「ピコっと！パピっと！！ガルパ☆ピコ！！！」',
+                    track: ["ピコっと！パピっと！！ガルパ☆ピコ！！！", "クインティプル☆すまいる", "ピコっと！パピっと！！ガルパ☆ピコ！！！ -instrumental-", "クインティプル☆すまいる -instrumental-"],
+                    releaseDate: "2018/08/22",
+                    type: 'single',
+                    links: [
+                        {
+                            description: "BanG Dream",
+                            link: "https://bang-dream.com/discographies/396"
+                        },
+                        {
+                            description: "NetEase",
+                            link: "https://music.163.com/album?id=72382741"
                         }
                     ]
                 }
@@ -412,6 +431,20 @@ const siteConfig: Helper.SiteConfig = {
             link: '',
             meta: ''
         }
+    ],
+    externalLinks: [
+        {
+            description: "BanG Dream!导航站",
+            link: "https://www.bangdream.moe/"
+        },
+        {
+            description: "BanG Dream! 查卡器",
+            link: "https://bangdream.ga/"
+        },
+        {
+            description: "BanG Dream! 百科",
+            link: "https://www.bangdreamwiki.com/"
+        },
     ]
 }
 
