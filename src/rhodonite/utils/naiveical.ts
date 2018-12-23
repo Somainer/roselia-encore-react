@@ -54,7 +54,7 @@ END:VEVENT
     }
 
     public toString() {
-        return this.makeCalendar(this.events).replace('\n', '\r\n')
+        return this.makeCalendar(this.events).replace('\n\n', '\n').trim()
     }
 
     private addEvent(event: IRoseliaEvent | IRoseliaEvent[]) {
@@ -136,6 +136,7 @@ END:VEVENT
         link.download = fileName
         link.href = href
         link.click()
+        setTimeout(() => this.releaseBlobUrl(href), 4e4)
         // this.downloadCalendar(fileName)
     }
 

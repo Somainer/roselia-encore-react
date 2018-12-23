@@ -123,7 +123,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                     } content={this.getContextText({
                         en: 'Add to system calendar',
                         cn: '添加到系统日历',
-                        jp: 'Add to system calendar'
+                        jp: 'システムカレンダーに追加'
                     })} />
             </div>
         )
