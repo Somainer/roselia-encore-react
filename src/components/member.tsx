@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as Protocol from '../rhodonite/protocols/encore'
 import * as Helpers from '../rhodonite/protocols/helpers'
-import {Container, Header, Segment, Grid, Divider, Label} from 'semantic-ui-react'
+import {Container, Header, Segment, Grid, Divider, Label, Popup} from 'semantic-ui-react'
 import {RouteComponentProps} from 'react-router'
 import { getLanguageAttribute } from 'src/rhodonite/protocols/helpers'
 import { TitledDocument } from 'src/rhodonite/component';
@@ -10,6 +10,7 @@ import selfish from '../rhodonite/utils/selfish'
 import { NotFound } from './notfound';
 import {lazyImageOf} from '../rhodonite/lazyimage'
 import { TargetLink } from 'src/rhodonite/smartLink';
+import { NaiveRoseliaiCal } from 'src/rhodonite/utils/naiveical';
 
 const notFoundMember: Protocol.MemberInfo = {
     name: {
@@ -75,6 +76,11 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
     private get isInBirthday() {
         return Helpers.dummySameDate(new Date, this.member.birthday)
     }
+    private downloadICal = () => {
+        const ical = new NaiveRoseliaiCal()
+        ical.addMemberBirthday(this.member, this.props.language, location.href)
+        ical.downloadCalendar(`${this.getContextText(this.member.name)}.ics`)
+    }
     private memberLayout = () => {
         const member = this.member
         return (
@@ -107,6 +113,18 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                     en: 'Happy Birthday',
                     jp: 'お誕生日おめでとう'
                 })}/>}
+                <Popup trigger={
+                        <Label as="a" size="large" icon="calendar plus outline" content={this.getContextText({
+                            en: 'Remind me when birthday',
+                            cn: '生日的时候提醒我',
+                            jp: '誕生日を知らせる'
+                        })}
+                        onClick={this.downloadICal}></Label>
+                    } content={this.getContextText({
+                        en: 'Add to system calendar',
+                        cn: '添加到系统日历',
+                        jp: 'Add to system calendar'
+                    })} />
             </div>
         )
     }

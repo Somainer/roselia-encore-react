@@ -22,11 +22,9 @@ interface TrackPageProps extends RouteComponentProps<TrackLocationProps> {
 
 const {getPositionByNum} = Helpers
 
-class TrackPage extends React.Component<TrackPageProps> {
+abstract class TrackPage extends React.Component<TrackPageProps> {
     private cachedTrack: Protocol.TrackInfo | undefined = undefined
-    protected getCurrentTrack (): Protocol.TrackInfo | undefined {
-        return undefined // Should be overloaded
-    }
+    protected abstract getCurrentTrack (): Protocol.TrackInfo | undefined
     public componentDidMount () {
         window.scrollTo(0, 0)
     }
@@ -77,13 +75,8 @@ class TrackPage extends React.Component<TrackPageProps> {
 
     private downloadICal = () => {
         const rCal = new NaiveRoseliaiCal()
-        rCal.addTrackRelease(this.track, this.props.language)
-        rCal.getBlogUrl(s => {
-            const link = document.createElement('a')
-            link.href = s
-            link.download = `${this.track.title}.ics`
-            link.click()
-        })
+        rCal.addTrackRelease(this.track, this.props.language, location.href)
+        rCal.downloadCalendar(`${this.track.title}.ics`)
     }
 
     private get localReleaseDate () {
@@ -126,10 +119,10 @@ class TrackPage extends React.Component<TrackPageProps> {
                     } content={this.getContextText({
                         en: 'Add to system calendar',
                         cn: '添加到系统日历',
-                        jp: 'Add to system calendar'
+                        jp: 'システムカレンダーに追加'
                     })} />
                 ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>}
-                
+                {/* {JSON.stringify(this.props.match)} */}
             </div>
         )
     }
