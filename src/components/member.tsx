@@ -79,7 +79,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
     private downloadICal = () => {
         const ical = new NaiveRoseliaiCal()
         ical.addMemberBirthday(this.member, this.props.language, location.href)
-        ical.downloadCalendar(`${this.getContextText(this.member.name)}.ics`)
+        ical.dummyDownload(`${this.getContextText(this.member.name)}.ics`)
     }
     private memberLayout = () => {
         const member = this.member

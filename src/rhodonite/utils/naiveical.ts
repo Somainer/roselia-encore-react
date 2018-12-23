@@ -1,5 +1,6 @@
 import { TrackInfo, SupportedLanguages, MemberInfo, MultiLanguageAttribute } from '../protocols/encore';
 import * as Helpers from '../protocols/helpers'
+import * as FileSaver from 'file-saver'
 
 interface IRoseliaEvent {
     summary: string
@@ -14,14 +15,15 @@ interface IRoseliaEvent {
     url?: string
 }
 export class NaiveRoseliaiCal {
-    private static beginTemplate = (body: string) => `
+    private beginTemplate = (body: string) => `
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Roselia//Track/Release
+PRODID:-//Roselia.moe//Encore
+CALSCALE:GREGORIAN
 ${body}
 END:VCALENDAR
-    `
-    private static eventTemplate = ({summary, start, end, allDay, description, repeat, url}: IRoseliaEvent) => `
+`
+    private eventTemplate = ({summary, start, end, allDay, description, repeat, url}: IRoseliaEvent) => `
 BEGIN:VEVENT
 SUMMARY:${summary}
 DTSTART;VALUE=DATE${allDay ? '' : '-TIME'}:${start}
@@ -30,11 +32,11 @@ DTSTAMP;VALUE=DATE${allDay ? '' : '-TIME'}:${start}
 UID:${start}@encore.roselia.moe
 DESCRIPTION:${description}
 ${repeat ? ('RRULE:FREQ='+repeat.frequent.toUpperCase() + ';INTERVAL=' + repeat.interval) : ''}
-${url ? ('URL:' + encodeURI(url)) : ''}
+${url ? ('URL;VALUE=URI:' + encodeURI(url)) : ''}
 END:VEVENT
-    `
+`
     private events: IRoseliaEvent[] = []
-    public static makeCalendar(events: IRoseliaEvent[]) {
+    public makeCalendar(events: IRoseliaEvent[]) {
         return this.beginTemplate(events.map(this.eventTemplate).join('\n'))
     }
 
@@ -52,7 +54,7 @@ END:VEVENT
     }
 
     public toString() {
-        return NaiveRoseliaiCal.makeCalendar(this.events)
+        return this.makeCalendar(this.events).replace('\n', '\r\n')
     }
 
     private addEvent(event: IRoseliaEvent | IRoseliaEvent[]) {
@@ -110,8 +112,12 @@ END:VEVENT
         })
     }
 
+    public async getBlobAsync () {
+        return this.getBlob()
+    }
+
     public async getBlobUrl() {
-        const blob = await new Promise(resolve => resolve(this.getBlob()));
+        const blob = await this.getBlobAsync()
         return URL.createObjectURL(blob);
     }
 
@@ -120,11 +126,24 @@ END:VEVENT
     }
 
     public async downloadCalendar(fileName: string) {
-        const url = await this.getBlobUrl()
+        const blob = await this.getBlobAsync()
+        FileSaver.saveAs(blob, fileName)
+    }
+
+    public async dummyDownload(fileName: string) {
+        const href = await this.getBlobUrl()
         const link = document.createElement('a')
-        link.href = url
         link.download = fileName
+        link.href = href
         link.click()
-        setTimeout(() => this.releaseBlobUrl(url), 4e4)
+        // this.downloadCalendar(fileName)
+    }
+
+    public getDataURLAsync (): Promise<string> {
+        return new Promise(r => {
+            const fr = new FileReader
+            fr.addEventListener('load', () => r(fr.result as string))
+            fr.readAsDataURL(this.getBlob())
+        })
     }
 }

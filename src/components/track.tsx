@@ -76,7 +76,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
     private downloadICal = () => {
         const rCal = new NaiveRoseliaiCal()
         rCal.addTrackRelease(this.track, this.props.language, location.href)
-        rCal.downloadCalendar(`${this.track.title}.ics`)
+        rCal.dummyDownload(`${this.track.title}.ics`)
     }
 
     private get localReleaseDate () {
@@ -115,7 +115,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
                 {(this.trackReleaseState && this.trackReleaseState < 0) ? (
                     <Popup trigger={
                         <Label as="a" color="violet" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}
-                        onClick={this.downloadICal}></Label>
+                        onClick={this.downloadICal} ></Label>
                     } content={this.getContextText({
                         en: 'Add to system calendar',
                         cn: '添加到系统日历',
