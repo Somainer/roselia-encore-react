@@ -51,16 +51,16 @@ export class Index extends React.Component<IndexProps, {}> {
                     <Image centered src={site.siteLogo} className={site.logoSpin ? "App-logo" : ""} />
                     {/* <img src={logo} className="App-logo"></img> */}
                     <h1 className="App-title">Roselia Encore</h1>
-                    <p>Current config: {site.configName}</p>
+                    {/* <p>Current config: {site.configName}</p> */}
                     <p className="App-intro">
                     <p>Made with love by Somainer</p>
                     {/* To get started, edit <code>src/App.tsx</code> and save to reload. */}
                     </p>
                     <p>为了演示可扩展性，目前这里有两个预制配置，阁下（DD）想要看哪一个？</p>
                     <Button.Group>
-                    <Link to="/"><Button positive={site.configName === 'roselia'}>Roselia</Button></Link>
+                    <Link to="/"><Button color={site.configName === 'roselia' ? 'violet' : undefined}>Roselia</Button></Link>
                     <Button.Or />
-                    <Link to="/starlight/"><Button positive={site.configName === 'starlight'}>Revue Starlight</Button></Link>
+                    <Link to="/starlight/"><Button color={site.configName === 'starlight' ? 'black' : undefined}>Revue Starlight</Button></Link>
                     </Button.Group>
                 </header>
                 <LazyComonent>

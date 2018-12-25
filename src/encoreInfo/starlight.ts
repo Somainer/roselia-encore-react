@@ -276,7 +276,7 @@ const singles = Helper.makeTrackOf('single')([
     {
         id: 5,
         title: "約束タワー",
-        track: ["約束タワー"],
+        track: ["約束タワー", "舞台プレパレイション", "約束タワー［Instrumental］", "舞台プレパレイション［Instrumental］"],
         releaseDate: "2019/1/9",
         links: [
             {

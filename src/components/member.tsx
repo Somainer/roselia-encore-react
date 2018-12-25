@@ -119,7 +119,11 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                             cn: '生日的时候提醒我',
                             jp: '誕生日を知らせる'
                         })}
-                        onClick={this.downloadICal}></Label>
+                        onClick={this.downloadICal}
+                        style={{
+                            background: member.encoreColor,
+                            color: 'white'
+                        }}></Label>
                     } content={this.getContextText({
                         en: 'Add to system calendar',
                         cn: '添加到系统日历',
