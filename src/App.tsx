@@ -23,9 +23,11 @@ import {CSSTransition} from 'react-transition-group'
 // import * as NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { NotFound } from './components/notfound';
+import { RoseliaStorage } from './rhodonite/utils/storage';
 
 class App extends React.Component<{}, {language: SupportedLanguages, siteConfig: SiteConfig}> {
   private methods: App = this
+  private storage: RoseliaStorage
   constructor (props: object) {
     super(props)
     this.state = {
@@ -33,10 +35,19 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
       siteConfig: roselia
     }
     this.methods = selfish(this)
+    this.storage = new RoseliaStorage('roselia-encore-settings')
   }
 
   private setLanguage(language: SupportedLanguages) {
     this.setState({
+      language
+    })
+    this.storage.setItem('language', language)
+  }
+
+  public componentDidMount() {
+    const language: SupportedLanguages = this.storage.getItem('language')
+    if(language) this.setState({
       language
     })
   }

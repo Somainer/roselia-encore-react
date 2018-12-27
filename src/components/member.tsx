@@ -95,7 +95,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                     color: member.encoreColor
                 }}
                 >
-                    {member.role}.{this.getContextText(member.name)}
+                    {member.role ? `${member.role}.` : ''}{this.getContextText(member.name)}
                 </Header>
                 <Header
                 as='h2'

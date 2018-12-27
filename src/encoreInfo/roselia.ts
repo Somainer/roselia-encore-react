@@ -279,13 +279,9 @@ const singles = Helper.makeTrackOf('single')([
                     "2月20号7CD10BD，我的钱包要空了。",
                     "My wallet is not safe and sound."
                 ]
-            },
-            {
-                title: '封面',
-                content: '目前暂时将游戏假封面作为专辑封面',
-                hidden: false
             }
-        ]
+        ],
+        hasLimitedEdition: true
     }
 ])
 
@@ -422,7 +418,7 @@ const siteConfig: Helper.SiteConfig = {
             coverImage: '/img/bangumi/bd2nd.jpg',
             releaseDate: '2019/1/1',
             link: 'https://anime.bang-dream.com/2nd/',
-            meta: 'Main Visual就用了3D是怎么回事？'
+            meta: '不知道3D动画会有怎样的表现，拭目以待。'
         },
         {
             name: 'BanG Dream! 3rd Season',
