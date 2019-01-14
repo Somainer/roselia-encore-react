@@ -202,7 +202,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
         return (
             <TitledDocument title={track.title}>
                 <div style={{
-                    height: "61.8vh"
+                    minHeight: "61.8vh"
                 }}>
                     <Container text>
                     <div>

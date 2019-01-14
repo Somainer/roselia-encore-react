@@ -140,7 +140,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
         return (
             <TitledDocument title={this.getContextText(member.name)}>
                 <div style={{
-                    height: "61.8vh"
+                    minHeight: "61.8vh"
                 }}>
                     <Container text>
                     <div>
