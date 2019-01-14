@@ -31,15 +31,18 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
 
     // @cached
     protected findIn (ls: Protocol.TrackInfo[]) {
+        const matchByDisplayid = ls.find(x => x.displayId === this.props.match.params.trackId)
+        if (matchByDisplayid){
+            return matchByDisplayid
+        }
         const regex = /(\d+)(\w+)/
         const matchRes = regex.exec(this.props.match.params.trackId)
         if (matchRes) {
             const [_, idx, pos] = matchRes
             const intIdx = parseInt(idx, 10)
             if (getPositionByNum(intIdx) === pos.toLowerCase()) return ls.find(x => x.id === intIdx)
-            return void 0
         }
-        return ls.find(x => x.displayId === this.props.match.params.trackId)
+        return void 0
     }
 
     private get track () {

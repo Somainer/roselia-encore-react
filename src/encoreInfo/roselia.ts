@@ -365,6 +365,20 @@ const siteConfig: Helper.SiteConfig = {
                             link: "https://music.163.com/album?id=72382741"
                         }
                     ]
+                },
+                {
+                    id: 3,
+                    displayId: '2nd Cover',
+                    title: 'バンドリ！ ガールズバンドパーティ！カバーコレクションVol.2',
+                    track: ['君じゃなきゃダメみたい/Poppin\'Party', 'DAYS/Poppin\'Party', 'Redo/Afterglow', 'ロストワンの号哭/Afterglow', 'ハッピーシンセサイザ/Pastel＊Palettes', '世界は恋に落ちている/Pastel＊Palettes', '深愛/Roselia', 'シャルル/Roselia', 'GO! GO! MANIAC/ハロー、ハッピーワールド！', 'Dragon Night/ハロー、ハッピーワールド！'],
+                    releaseDate: '2019-03-16',
+                    type: 'cover',
+                    links: [
+                        {
+                            description: "BanG Dream",
+                            link: "https://bang-dream.com/discographies/742"
+                        }
+                    ]
                 }
             ]
         }
