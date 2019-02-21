@@ -62,7 +62,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
         window.scroll(0, 0)
     }
     private getCurrentMember() {
-        return this.props.currentMember || this.props.siteConfig.members.filter(x => x.name.en.split(' ')[1].toLowerCase() === this.props.match.params.member.toLowerCase())[0]
+        return this.props.currentMember || this.props.siteConfig.members.filter(x => Helpers.getLast(x.name.en.split(' ')).toLowerCase() === this.props.match.params.member.toLowerCase())[0]
     }
     private getContextText(ctx: Protocol.MultiLanguageAttribute | string) {
         return getLanguageAttribute(ctx, this.props.language)
@@ -113,7 +113,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                     en: 'Happy Birthday',
                     jp: 'お誕生日おめでとう'
                 })}/>}
-                <Popup trigger={
+                {member.birthday ? (<Popup trigger={
                         <Label as="a" size="large" icon="calendar plus outline" content={this.getContextText({
                             en: 'Remind me when birthday',
                             cn: '生日的时候提醒我',
@@ -128,7 +128,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                         en: 'Add to system calendar',
                         cn: '添加到系统日历',
                         jp: 'システムカレンダーに追加'
-                    })} />
+                    })} />) : null}
             </div>
         )
     }

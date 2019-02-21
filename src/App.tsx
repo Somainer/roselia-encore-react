@@ -5,8 +5,9 @@ import 'semantic-ui/dist/semantic.css'
 
 // import logo from './logo.svg';
 // import {TitledDocument} from './rhodonite/component'
-import roselia from './encoreInfo/roselia'
-import starlight from './encoreInfo/starlight'
+// import roselia from './encoreInfo/roselia'
+// import starlight from './encoreInfo/starlight'
+import rhodoniteSite from './encoreInfo/siteConfig'
 import {SupportedLanguages, SiteConfig} from './rhodonite/protocols/encore'
 
 import {NavBar} from './components/navbar'
@@ -32,7 +33,7 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
     super(props)
     this.state = {
       language: 'cn',
-      siteConfig: roselia
+      siteConfig: rhodoniteSite.defaultSite
     }
     this.methods = selfish(this)
     this.storage = new RoseliaStorage('roselia-encore-settings')
@@ -93,7 +94,8 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
         favicon: site.siteFavicon,
         setLanguage: this.methods.setLanguage,
         language: this.state.language,
-        indexPath: this.state.siteConfig.configName === 'roselia' ? '/' : '/starlight/'
+        //indexPath: this.state.siteConfig.configName === 'roselia' ? '/' : '/starlight/',
+        indexPath: rhodoniteSite.encoreSites.find(c => c.site.configName === this.state.siteConfig.configName)!.path
       }
     return (
       <div>
@@ -105,8 +107,11 @@ class App extends React.Component<{}, {language: SupportedLanguages, siteConfig:
             <CSSTransition classNames="fade" timeout={300}>
 
               <Switch>
-                <StatedRoute path="/starlight/" component={LazyIndex} onRender={StateSetter(starlight)}></StatedRoute>
-                <StatedRoute path="/" component={LazyIndex} onRender={StateSetter(roselia)}></StatedRoute>
+                {rhodoniteSite.encoreSites.map(s => (
+                  <StatedRoute path={s.path} component={LazyIndex} onRender={StateSetter(s.site)}></StatedRoute>
+                ))}
+                {/* <StatedRoute path="/starlight/" component={LazyIndex} onRender={StateSetter(starlight)}></StatedRoute>
+                <StatedRoute path="/" component={LazyIndex} onRender={StateSetter(roselia)}></StatedRoute> */}
                 {/* <Route exact path="/starlight" render={this.renderIndex(starlight)}></Route> */}
                 {/* {site.members.map(m => {
                   const memberLink = `/member/${m.name.en.split(' ')[1]}`

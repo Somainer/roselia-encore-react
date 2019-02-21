@@ -121,6 +121,10 @@ export function getPositionByNum (x: number) {
     return ['st', 'nd', 'rd'][(x % 10) - 1] || 'th'
 }
 
+export function getLast<T>(ts: T[]): T {
+    return ts[ts.length - 1]
+}
+
 export {
     makeMembers,
     makeTracks,

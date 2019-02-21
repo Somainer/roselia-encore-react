@@ -2,11 +2,12 @@ import * as React from 'react'
 import {Grid, Image, Container, Card, Header, Reveal} from 'semantic-ui-react'
 import './encore.css'
 import {SupportedLanguages, MultiLanguageAttribute, SiteConfig, ExternalTrackList, ExternalLinks} from '../rhodonite/protocols/encore'
-import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn} from '../rhodonite/protocols/helpers'
+import {mergeLanguageAttribute, getLanguageAttribute, sameDate, makeCompareOn, getLast} from '../rhodonite/protocols/helpers'
 import {getPositionByNum} from '../rhodonite/protocols/helpers'
 import {lazyImageOf} from '../rhodonite/lazyimage'
 import {LazyComonent} from '../rhodonite/lazycomponent'
 import {TargetLink} from '../rhodonite/smartLink'
+import { selectByLuminance } from 'src/rhodonite/utils/colorUtils';
 
 type SemanticColumnNum = 1 | 3 | 4
 
@@ -110,7 +111,8 @@ export const memberSection = (si: SiteConfig, language: SupportedLanguages) => {
             color: m.encoreColor,
             meta: m.role,
             description: `CV:${languageGetter(mergeLanguageAttribute(m.CVName))}`,
-            link: `member/${m.name.en.split(' ')[1]}/`
+            link: `member/${getLast(m.name.en.split(' '))}/`,
+            isDark: selectByLuminance(m.encoreColor, false, true, true)
         })),
         dark: true,
         lazyImageSrc: si.siteLogo

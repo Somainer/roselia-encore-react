@@ -115,7 +115,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
                 >
                     {track.displayId ? track.displayId : `${track.id}${getPositionByNum(track.id)} ${Helpers.capatialize(track.type||'')}`}
                 </Header>
-                {(this.trackReleaseState && this.trackReleaseState < 0) ? (
+                {track.releaseDate ? ((this.trackReleaseState && this.trackReleaseState < 0) ? (
                     <Popup trigger={
                         <Label as="a" color="violet" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}
                         onClick={this.downloadICal} ></Label>
@@ -124,7 +124,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
                         cn: '添加到系统日历',
                         jp: 'システムカレンダーに追加'
                     })} />
-                ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>}
+                ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>) : null}
                 {/* {JSON.stringify(this.props.match)} */}
             </div>
         )

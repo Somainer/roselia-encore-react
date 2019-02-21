@@ -288,6 +288,7 @@ const singles = Helper.makeTrackOf('single')([
 ])
 
 const siteConfig: Helper.SiteConfig = {
+    title: 'Revue Starlight',
     configName: "starlight",
     members,
     singles,

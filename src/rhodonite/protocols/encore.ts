@@ -108,6 +108,7 @@ export interface BangumiItem {
 }
 
 export interface SiteConfig {
+    title: string,
     configName: string
     playerUrl?: string
     siteLogo: string
@@ -126,4 +127,12 @@ export interface SiteConfig {
     bangumiList?: BangumiItem[],
     externalLinks?: ExternalLinks
     [attr: string]: any
+}
+
+export interface SiteOverallConfig {
+    encoreSites: {
+        site: SiteConfig,
+        path: string
+    }[],
+    defaultSite: SiteConfig
 }

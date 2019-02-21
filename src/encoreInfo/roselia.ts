@@ -145,6 +145,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "萌娘百科",
                 link: "https://zh.moegirl.org/BLACK_SHOUT"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/black-shout-ep/1226412741'
             }
         ],
         hasLimitedEdition: true
@@ -162,6 +166,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "NetEase",
                 link: "http://music.163.com/album?id=35663708"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/re-birth-day-ep/1253751369'
             }
         ],
         hasLimitedEdition: true
@@ -179,6 +187,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "NetEase",
                 link: "http://music.163.com/album?id=36030721"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/nessyoku-starmine-ep/1278805653'
             }
         ]
     },
@@ -195,6 +207,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "NetEase",
                 link: "http://music.163.com/album?id=36856222"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/oneness-ep/1317171039'
             }
         ],
         hasLimitedEdition: true
@@ -212,6 +228,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "NetEase",
                 link: "http://music.163.com/album?id=37987030"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/opera-of-the-wasteland-ep/1356941941'
             }
         ],
         external: [{
@@ -232,6 +252,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "NetEase",
                 link: "https://music.163.com/album?id=71852033"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/r-ep/1407582593'
             }
         ],
         external: [{
@@ -253,6 +277,10 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "NetEase",
                 link: "https://music.163.com/album?id=74858139"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/brave-jewel-single/1444590568'
             }
         ],
         external: [{
@@ -270,6 +298,14 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "BanG Dream",
                 link: "https://bang-dream.com/discographies/739"
+            },
+            {
+                description: 'NetEase',
+                link: 'https://music.163.com/album?id=75639892'
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/safe-and-sound-single/1450478848'
             }
         ],
         external: [
@@ -282,6 +318,40 @@ const singles = Helper.makeTrackOf('single')([
             }
         ],
         hasLimitedEdition: true
+    },
+    {
+        id: 9,
+        title: 'Ringing Bloom',
+        track: ['Ringing Bloom', '?', 'Ringing Bloom -instrumental-', '? -instrumental-'],
+        releaseDate: '',
+        links: [
+            {
+                description: '萌娘百科',
+                link: 'https://zh.moegirl.org/zh-cn/Ringing_Bloom'
+            }
+        ],
+        external: [
+            {
+                title: '',
+                hidden: true,
+                content: ['Rinrin Bloom', '文体 Bloom']
+            },
+            {
+                title: 'GBP 相关',
+                content: [
+                    '因为是在游戏中出现的原创歌曲，我暂且认为是9单的歌曲（PA：明明是我先来的，怎么就成CW曲了？）',
+                    '这首歌根本就不能在手机上玩',
+                    '本人比较菜，只能用全奶才能在手机和pad上分别clear（FC有生之年吧）',
+                    '物量冠军，相比之下GK是儿歌'
+                ]
+            },
+            {
+                title: '1094 Note',
+                content: '让我们记住这个鬼畜的EX物量',
+                hidden: false
+            }
+        ],
+        hasLimitedEdition: false
     }
 ])
 
@@ -299,6 +369,10 @@ const albums = Helper.makeTrackOf('album')([
             {
                 description: "NetEase",
                 link: "http://music.163.com/m/album?id=38509280"
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://itunes.apple.com/cn/album/anfang/1371270926'
             }
         ],
         hasLimitedEdition: true,
@@ -310,6 +384,7 @@ const albums = Helper.makeTrackOf('album')([
 ])
 
 const siteConfig: Helper.SiteConfig = {
+    title: 'Roselia Encore',
     configName: "roselia",
     members,
     siteLogo: '/img/logo.png',

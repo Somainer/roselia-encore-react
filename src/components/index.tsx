@@ -42,6 +42,10 @@ export class Index extends React.Component<IndexProps, {}> {
         }
     }
 
+    public componentDidMount() {
+        document.title = this.props.siteConfig.title
+    }
+
     private index() {
         const site = this.props.siteConfig
         return (
@@ -50,11 +54,10 @@ export class Index extends React.Component<IndexProps, {}> {
                 <header className="App-header" style={{textAlign: 'center'}}>
                     <Image centered src={site.siteLogo} className={site.logoSpin ? "App-logo" : ""} />
                     {/* <img src={logo} className="App-logo"></img> */}
-                    <h1 className="App-title">Roselia Encore</h1>
+                    <h1 className="App-title">{site.title}</h1>
                     {/* <p>Current config: {site.configName}</p> */}
                     <p className="App-intro">
                     <p>Made with love by Somainer</p>
-                    {/* To get started, edit <code>src/App.tsx</code> and save to reload. */}
                     </p>
                     <p>为了演示可扩展性，目前这里有两个预制配置，阁下（DD）想要看哪一个？</p>
                     <Button.Group>
