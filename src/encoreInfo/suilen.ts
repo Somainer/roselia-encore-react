@@ -138,6 +138,18 @@ const siteConfig = Helper.makeSiteConfig({
                 }
             ],
             hasLimitedEdition: true
+        },
+        {
+            id: 3,
+            title: 'タイトル未定',
+            track: ['?', 'Takin’ my Heart', '? -instrumental-', 'Takin’ my Heart -instrumental-'],
+            releaseDate: '2019/06/19',
+            links: [
+                {
+                    description: 'BanG Dream',
+                    link: 'https://bang-dream.com/discographies/962'
+                }
+            ]
         }
     ]),
     members,

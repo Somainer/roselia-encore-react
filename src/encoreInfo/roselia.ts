@@ -321,10 +321,14 @@ const singles = Helper.makeTrackOf('single')([
     },
     {
         id: 9,
-        title: 'Ringing Bloom',
-        track: ['Ringing Bloom', '?', 'Ringing Bloom -instrumental-', '? -instrumental-'],
-        releaseDate: '',
+        title: 'FIRE BIRD',
+        track: ['FIRE BIRD', 'Ringing Bloom', 'FIRE BIRD -instrumental-', 'Ringing Bloom -instrumental-'],
+        releaseDate: '2019/07/24',
         links: [
+            {
+                description: 'BanG Dream',
+                link: 'https://bang-dream.com/discographies/963'
+            },
             {
                 description: '萌娘百科',
                 link: 'https://zh.moegirl.org/zh-cn/Ringing_Bloom'
@@ -334,12 +338,12 @@ const singles = Helper.makeTrackOf('single')([
             {
                 title: '',
                 hidden: true,
-                content: ['Rinrin Bloom', '文体 Bloom']
+                content: ['Rinrin Bloom']
             },
             {
                 title: 'GBP 相关',
                 content: [
-                    '因为是在游戏中出现的原创歌曲，我暂且认为是9单的歌曲（PA：明明是我先来的，怎么就成CW曲了？）',
+                    '因为是在游戏中出现的原创歌曲，我暂且认为是9单的歌曲（PA：明明是我先来的，怎么就成CW曲了？）（还真是CW曲草（日本語意味））',
                     '这首歌根本就不能在手机上玩',
                     '本人比较菜，只能用全奶才能在手机和pad上分别clear（FC有生之年吧）',
                     '物量冠军，相比之下GK是儿歌'
@@ -347,7 +351,7 @@ const singles = Helper.makeTrackOf('single')([
             },
             {
                 title: '1094 Note',
-                content: '让我们记住这个鬼畜的EX物量',
+                content: ['让我们记住这个鬼畜的EX物量', 'C/W曲尚且如此，听着感觉FIRE BIRD难度也不会低'],
                 hidden: false
             }
         ],

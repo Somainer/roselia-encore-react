@@ -282,6 +282,23 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: "Revue Starlight",
                 link: "https://revuestarlight.com/music/5thsinglecd/"
+            },
+            {
+                description: 'NetEase',
+                link: 'https://music.163.com/album?id=75799869'
+            }
+        ]
+    },
+    {
+        id: 0,
+        displayId: '舞台2nd',
+        title: '百色リメイン',
+        track: ['百色リメイン', 'Bright!Light!', '百色リメイン -instrumental-', 'Bright!Light! -instrumental-'],
+        releaseDate: '2019/04/17',
+        links: [
+            {
+                description: 'Revue Starlight',
+                link: 'https://revuestarlight.com/music/%E7%99%BE%E8%89%B2%E3%83%AA%E3%83%A1%E3%82%A4%E3%83%B3/'
             }
         ]
     }
