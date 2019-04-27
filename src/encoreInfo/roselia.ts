@@ -355,7 +355,7 @@ const singles = Helper.makeTrackOf('single')([
                 hidden: false
             }
         ],
-        hasLimitedEdition: false
+        hasLimitedEdition: true
     }
 ])
 
@@ -510,8 +510,8 @@ const siteConfig: Helper.SiteConfig = {
             name: 'BanG Dream! 2nd Season',
             coverImage: '/img/bangumi/bd2nd.jpg',
             releaseDate: '2019/1/1',
-            link: 'https://anime.bang-dream.com/2nd/',
-            meta: '不知道3D动画会有怎样的表现，拭目以待。'
+            link: 'https://www.bilibili.com/bangumi/media/md4762002/',
+            meta: ''
         },
         {
             name: 'BanG Dream! 3rd Season',

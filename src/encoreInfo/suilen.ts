@@ -141,8 +141,8 @@ const siteConfig = Helper.makeSiteConfig({
         },
         {
             id: 3,
-            title: 'タイトル未定',
-            track: ['?', 'Takin’ my Heart', '? -instrumental-', 'Takin’ my Heart -instrumental-'],
+            title: 'Invincible Fighter',
+            track: ['Invincible Fighter', 'Takin’ my Heart', 'Invincible Fighter -instrumental-', 'Takin’ my Heart -instrumental-'],
             releaseDate: '2019/06/19',
             links: [
                 {

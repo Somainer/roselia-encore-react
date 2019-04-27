@@ -299,6 +299,22 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: 'Revue Starlight',
                 link: 'https://revuestarlight.com/music/%E7%99%BE%E8%89%B2%E3%83%AA%E3%83%A1%E3%82%A4%E3%83%B3/'
+            },
+            {
+                description: '百色リメイン【華恋&ひかり&まひるver.】',
+                link: 'https://music.163.com/album?id=78618376'
+            },
+            {
+                description: '百色リメイン【双葉&香子ver.】',
+                link: 'https://music.163.com/album?id=78618569'
+            },
+            {
+                description: '百色リメイン【純那&ななver.】',
+                link: 'https://music.163.com/album?id=78619022'
+            },
+            {
+                description: '百色リメイン【真矢&クロディーヌver.】',
+                link: 'https://music.163.com/album?id=78619097'
             }
         ]
     }
