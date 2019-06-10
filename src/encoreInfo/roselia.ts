@@ -399,7 +399,7 @@ const siteConfig: Helper.SiteConfig = {
     playerUrl: '' && 'https://music.163.com/outchain/player?type=0&id=1999324469&auto=0&height=430',
     bannerImage: {
         foreground: '/img/roselia characters.png',
-        background: '/img/roselia-top.png'
+        background: '/img/roselia-bg.png'
     },
     externalTrackLists: Helper.makeExternalTrackList([
         {

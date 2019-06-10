@@ -24,3 +24,4 @@ yarn-error.log*
 src/semantic/
 */__pycache__/
 s.py
+.idea/*

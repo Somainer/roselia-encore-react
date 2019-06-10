@@ -149,7 +149,8 @@ const siteConfig = Helper.makeSiteConfig({
                     description: 'BanG Dream',
                     link: 'https://bang-dream.com/discographies/962'
                 }
-            ]
+            ],
+            hasLimitedEdition: true
         }
     ]),
     members,

@@ -95,9 +95,10 @@ export class NavBar extends React.Component<NavBarConfig, {opened: boolean, menu
   }
 
   private fixedMenuStyle: React.CSSProperties = {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     border: '1px solid #ddd',
-    boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)'
+    //boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
+    backdropFilter: 'blur(15px) saturate(180%)'
   }
 
   public render() {
