@@ -336,9 +336,18 @@ const singles = Helper.makeTrackOf('single')([
         ],
         external: [
             {
+                title: 'Blu-ray',
+                content: [
+                    'アニメ「BanG Dream! 2nd Season」#5~#6',
+                    'Web用次回予告#5~#6',
+                    'アニメ「BanG Dream! 2nd Season」CM Roselia編'
+                ],
+                hidden: false
+            },
+            {
                 title: '',
                 hidden: true,
-                content: ['Rinrin Bloom']
+                content: 'Rinrin Bloom'
             },
             {
                 title: 'GBP 相关',
@@ -356,6 +365,24 @@ const singles = Helper.makeTrackOf('single')([
             }
         ],
         hasLimitedEdition: true
+    },
+    {
+        id: 10,
+        title: '約束',
+        track: ['約束', '?', '約束 -instrumental-', '? -instrumental-'],
+        releaseDate: '',
+        external: [
+            {
+                title: '',
+                content: 'Determination Symphony (Lisa Version)'
+            }
+        ],
+        links: [
+            {
+                description: '谱面',
+                link: 'https://bangdream.ga/music/jp/200'
+            }
+        ]
     }
 ])
 
@@ -508,14 +535,14 @@ const siteConfig: Helper.SiteConfig = {
         },
         {
             name: 'BanG Dream! 2nd Season',
-            coverImage: '/img/bangumi/bd2nd.jpg',
+            coverImage: '/img/bangumi/bd2nd.png',
             releaseDate: '2019/1/1',
             link: 'https://www.bilibili.com/bangumi/media/md4762002/',
             meta: ''
         },
         {
             name: 'BanG Dream! 3rd Season',
-            coverImage: '/img/bangumi/bd2nd.jpg',
+            coverImage: '/img/bangumi/bd3rd.jpg',
             releaseDate: '2019/10/1',
             link: '',
             meta: ''

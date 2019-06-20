@@ -64,6 +64,8 @@ export class Index extends React.Component<IndexProps, {}> {
                     <Link to="/"><Button color={site.configName === 'roselia' ? 'violet' : undefined}>Roselia</Button></Link>
                     <Button.Or />
                     <Link to="/starlight/"><Button color={site.configName === 'starlight' ? 'black' : undefined}>Revue Starlight</Button></Link>
+                        <Button.Or />
+                        <Link to="/raise-a-suilen/"><Button color={site.configName === 'suilen' ? 'purple' : undefined}> Raise a Suilen </Button></Link>
                     </Button.Group>
                 </header>
                 <LazyComonent>

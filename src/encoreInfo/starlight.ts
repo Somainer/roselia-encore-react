@@ -30,7 +30,7 @@ const members = Helper.makeMembers([
             jp: "三森すずこ"
         },
         birthday: "1-8",
-        role: "光哥哥",
+        role: "统治スタリラ的女人",
         horoscope: "摩羯",
         encoreColor: "#6292E9"
     },

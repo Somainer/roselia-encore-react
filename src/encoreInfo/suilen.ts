@@ -3,8 +3,8 @@ import * as Helper from '../rhodonite/protocols/helpers'
 const members = Helper.makeMembers([
     {
         name: {
-            jp: "レイヤ",
-            cn: "LAYER",
+            jp: "和奏レイ",
+            cn: "和奏瑞依",
             en: "LAYER"
         },
         birthday: '',
@@ -21,7 +21,7 @@ const members = Helper.makeMembers([
         name: {
             en: "LOCK",
             cn: "朝日六花",
-            jp: "ロック"
+            jp: "朝日六花"
         },
         CVName: {
             en: "Kohara Riko",
@@ -36,8 +36,8 @@ const members = Helper.makeMembers([
     {
         name: {
             "en": "MASKING",
-            "cn": "MASKING",
-            "jp": "マスキング"
+            "cn": "佐藤益木",
+            "jp": "佐藤ますき"
         },
         birthday: "",
         role: "Dr",
@@ -53,7 +53,7 @@ const members = Helper.makeMembers([
     {
         name: {
             en: "PAREO",
-            cn: "PAREO",
+            cn: "Nyubara Reona",
             jp: "パレオ"
         },
         birthday: "",
@@ -76,7 +76,7 @@ const members = Helper.makeMembers([
     {
         name: {
             en: "CHU²",
-            cn: "CHU²",
+            cn: "Tamade Chiyu",
             jp: "チュチュ"
         },
         birthday: "",
@@ -148,6 +148,21 @@ const siteConfig = Helper.makeSiteConfig({
                 {
                     description: 'BanG Dream',
                     link: 'https://bang-dream.com/discographies/962'
+                },
+                {
+                    description: 'NetEase',
+                    link: 'https://music.163.com/album?id=79877573'
+                }
+            ],
+            external: [
+                {
+                    title: 'Blu-ray',
+                    content: [
+                        'アニメ「BanG Dream! 2nd Season」#3~#4',
+                        'Web用次回予告#3~#4',
+                        '「History of RAS」再編集版'
+                    ],
+                    hidden: false
                 }
             ],
             hasLimitedEdition: true
@@ -156,7 +171,8 @@ const siteConfig = Helper.makeSiteConfig({
     members,
     themeColor: '',
     bannerImage: {
-        background: '/img/suilen/banner.jpg'
+        background: '/img/suilen/background.jpg',
+        // foreground: '/img/suilen/ras-fore.png'
     },
     getters: {
         cvImageGetter(m) {
@@ -165,7 +181,8 @@ const siteConfig = Helper.makeSiteConfig({
         memberImageGetter(m) {
             return ''
         },
-        trackImageGetter (t) {
+        trackImageGetter(t) {
+            if(t.cover) return t.cover
             return `/img/suilen/${Helper.capatialize(t.type!)}_${t.id}.jpg`
         },
         limitedTrackImageGetter (t) {
