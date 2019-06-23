@@ -5,21 +5,21 @@ const members = Helper.makeMembers([
         name: {
             jp: "和奏レイ",
             cn: "和奏瑞依",
-            en: "LAYER"
+            en: "Wakana Rei"
         },
         birthday: '',
-        role: "Vo/Ba",
+        role: "Vo/Ba LAYER",
         CVName: {
             jp: "Raychell",
             cn: "Raychell",
             en: "Raychell"
         },
         horoscope: '',
-        encoreColor: "#CD0A10",
+        encoreColor: "#CD0A10"
     },
     {
         name: {
-            en: "LOCK",
+            en: "Asahi Rokka",
             cn: "朝日六花",
             jp: "朝日六花"
         },
@@ -29,18 +29,18 @@ const members = Helper.makeMembers([
             jp: "小原莉子"
         },
         birthday: "",
-        role: "Gt",
+        role: "Gt LOCK",
         horoscope: "",
         encoreColor: "#BCFF64"
     },
     {
         name: {
-            "en": "MASKING",
+            "en": "Sato Masuki",
             "cn": "佐藤益木",
             "jp": "佐藤ますき"
         },
         birthday: "",
-        role: "Dr",
+        role: "Dr MASKING",
         horoscope: "",
         encoreColor: "#E1BA39",
         CVName: {
@@ -52,13 +52,13 @@ const members = Helper.makeMembers([
     },
     {
         name: {
-            en: "PAREO",
-            cn: "Nyubara Reona",
-            jp: "パレオ"
+            en: "Nyubara Reona",
+            cn: "PAREO",
+            jp: "鳰原れおな"
         },
         birthday: "",
         horoscope: "",
-        role: 'Key',
+        role: 'Key PAREO',
         encoreColor: "#FF99CC",
         CVName: {
             en: "Kurachi Reo",
@@ -75,13 +75,13 @@ const members = Helper.makeMembers([
     },
     {
         name: {
-            en: "CHU²",
-            cn: "Tamade Chiyu",
-            jp: "チュチュ"
+            en: "Tamade Chiyu",
+            cn: "CHU2",
+            jp: "玉出ちゆ"
         },
         birthday: "",
         horoscope: "",
-        role: 'Dj',
+        role: 'Dj CHU²',
         encoreColor: "#33CCFF",
         CVName: {
             en: "Tsumugi Risa",
@@ -176,10 +176,10 @@ const siteConfig = Helper.makeSiteConfig({
     },
     getters: {
         cvImageGetter(m) {
-            return ''
+            return m.cvImage || ''
         },
         memberImageGetter(m) {
-            return ''
+            return m.memberImage || ''
         },
         trackImageGetter(t) {
             if(t.cover) return t.cover

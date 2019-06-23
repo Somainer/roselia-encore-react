@@ -126,6 +126,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
                     })} />
                 ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>) : null}
                 {/* {JSON.stringify(this.props.match)} */}
+                {track.topExtension ? <track.topExtension {...this.props} /> : null}
             </div>
         )
     }
@@ -151,43 +152,46 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
             <Segment style={{ padding: '8em 0em' }} vertical>
                 <Grid container stackable verticalAlign='middle'>
                     <Grid.Row>
-                    <Grid.Column width={8}>
-                        <AttrWithTitle indent={false} header={{cn: "音轨", jp:"収録内容", en:"Track"}}>
-                            <ol>
-                                {track.track.map((s, i) => (
-                                    <li key={i}>{s}</li>
-                                ))}
-                            </ol>
-                        </AttrWithTitle>
-                        <AttrWithTitle when={!!track.links} indent={false} header={{cn: "链接", jp:"リンク", en: "Links"}}>
-                            <ul>
-                                {track.links && track.links.map((l, i) => (
-                                    <li key={i}>
-                                        <TargetLink link={l.link}>{l.description}</TargetLink>
-                                    </li>
-                                ))}
-                            </ul>
-                            
-                            
-                        </AttrWithTitle> 
-                        {track.external && track.external.map(ex => (
-                            <AttrWithTitle key={ex.title} header={ex.title}>
-                                {(ex.content instanceof Array) ? (
-                                    <ul>
-                                        {ex.content.map((e, idx) => (
-                                            <li key={idx}><HiddenText hidden={ex.hidden}>{this.getContextText(e)}</HiddenText></li>
-                                        ))}
-                                    </ul>
-                        ) : (<HiddenText hidden={ex.hidden}>{this.getContextText(ex.content)}</HiddenText>)}
+                        <Grid.Column width={8}>
+                            <AttrWithTitle indent={false} header={{cn: "音轨", jp:"収録内容", en:"Track"}}>
+                                <ol>
+                                    {track.track.map((s, i) => (
+                                        <li key={i}>{s}</li>
+                                    ))}
+                                </ol>
                             </AttrWithTitle>
-                        ))}
-                    </Grid.Column>
-                    <Grid.Column floated='right' width={8}>
-                        <LazyImage fluid bordered rounded size='massive' src={getters.trackImageGetter(track)} />
-                        <Divider hidden />
-                        {track.hasLimitedEdition && (
-                        <LazyImage fluid bordered rounded size='massive' src={getters.limitedTrackImageGetter(track)} />)}
-                    </Grid.Column>
+                            <AttrWithTitle when={!!track.links} indent={false} header={{cn: "链接", jp:"リンク", en: "Links"}}>
+                                <ul>
+                                    {track.links && track.links.map((l, i) => (
+                                        <li key={i}>
+                                            <TargetLink link={l.link}>{l.description}</TargetLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                                
+                                
+                            </AttrWithTitle> 
+                            {track.external && track.external.map(ex => (
+                                <AttrWithTitle key={ex.title} header={ex.title}>
+                                    {(ex.content instanceof Array) ? (
+                                        <ul>
+                                            {ex.content.map((e, idx) => (
+                                                <li key={idx}><HiddenText hidden={ex.hidden}>{this.getContextText(e)}</HiddenText></li>
+                                            ))}
+                                        </ul>
+                            ) : (<HiddenText hidden={ex.hidden}>{this.getContextText(ex.content)}</HiddenText>)}
+                                </AttrWithTitle>
+                            ))}
+                            {track.leftExtension ? <track.leftExtension {...this.props}/> : null}
+                        </Grid.Column>
+                        <Grid.Column floated='right' width={8}>
+                            <LazyImage fluid bordered rounded size='massive' src={getters.trackImageGetter(track)} />
+                            <Divider hidden />
+                            {track.hasLimitedEdition && (
+                                <LazyImage fluid bordered rounded size='massive' src={getters.limitedTrackImageGetter(track)} />)}
+                            {track.rightExtension && <Divider hidden />}
+                            {track.rightExtension ? <track.rightExtension {...this.props}/> : null}
+                        </Grid.Column>
                     </Grid.Row>
                     
                 </Grid>

@@ -31,6 +31,7 @@ interface SectionCard {
     lazyImageSrc?: string,
     isOuterLink?: boolean
     onClick?: () => void
+    imageSize?: string
 }
 
 function positionWithNumByNum (num: number) {
@@ -48,11 +49,11 @@ export const EncoreCard = (sc: SectionCard) => {
                     <Reveal animated='move'>
                         <Reveal.Content visible>
                             {/* <Image src={sc.image} /> */}
-                            <LazyImage src={sc.image} />
+                                <LazyImage size={sc.imageSize} fluid src={sc.image} />
                         </Reveal.Content>
                         <Reveal.Content hidden>
                             {/* <Image src={sc.secondaryImage} /> */}
-                            <LazyImage src={sc.secondaryImage} />
+                                <LazyImage size={sc.imageSize} fluid src={sc.secondaryImage} />
                         </Reveal.Content>
                     </Reveal>
                     ) : <LazyImage src={sc.image}/>

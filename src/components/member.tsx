@@ -129,6 +129,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                         cn: '添加到系统日历',
                         jp: 'システムカレンダーに追加'
                     })} />) : null}
+                {member.topExtension ? <member.topExtension {...this.props} /> : null}
             </div>
         )
     }
@@ -210,6 +211,8 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                                 </AttrWithTitle>
                             ))}
                         </AttrWithTitle>
+                            
+                        {member.leftExtension ? <member.leftExtension {...this.props} /> : null}
                     </Grid.Column>
                     <Grid.Column floated='right' width={8}>
                         <LazyImage fluid bordered rounded size='massive' src={getters.memberImageGetter(member)} />

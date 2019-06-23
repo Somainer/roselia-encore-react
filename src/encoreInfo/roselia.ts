@@ -1,7 +1,8 @@
 import * as Helper from '../rhodonite/protocols/helpers'
 import { asyncComponent } from "../rhodonite/asynccomponent";
 const RoseliaLyrics = () => import('./roseliaLyric').then(x => x.RoseliaLyrics)
-// import {Component} from 'react'
+import { createElement } from 'react'
+import { EncoreCard } from 'src/components/section';
 
 const members = Helper.makeMembers([
     {
@@ -103,6 +104,7 @@ const members = Helper.makeMembers([
         bloodType: "O",
         horoscope: "天秤",
         encoreColor: "#bbbbbb",
+        avatar: 'https://img.moegirl.org/common/thumb/8/80/Rinko_icon.png/60px-Rinko_icon.png',
         CVName: [
             {
                 en: "Akesaka Satomi",
@@ -117,9 +119,9 @@ const members = Helper.makeMembers([
         ],
         external: [
             {
-                title: '',
+                title: '……（。-__-。）',
                 hidden: false,
-                content: 'twitter关注数1小时破万祝贺！'
+                content: '……（。-__-。）'
             }
         ],
         memberPicNum: 3,
@@ -330,7 +332,11 @@ const singles = Helper.makeTrackOf('single')([
                 link: 'https://bang-dream.com/discographies/963'
             },
             {
-                description: '萌娘百科',
+                description: '萌娘百科（FIRE BIRD）',
+                link: 'https://zh.moegirl.org/FIRE_BIRD'
+            },
+            {
+                description: '萌娘百科（Ringing Bloom）',
                 link: 'https://zh.moegirl.org/zh-cn/Ringing_Bloom'
             }
         ],
@@ -350,21 +356,38 @@ const singles = Helper.makeTrackOf('single')([
                 content: 'Rinrin Bloom'
             },
             {
-                title: 'GBP 相关',
+                title: 'GBP 相关（Ringring Bloom）',
                 content: [
                     '因为是在游戏中出现的原创歌曲，我暂且认为是9单的歌曲（PA：明明是我先来的，怎么就成CW曲了？）（还真是CW曲草（日本語意味））',
                     '这首歌根本就不能在手机上玩',
-                    '本人比较菜，只能用全奶才能在手机和pad上分别clear（FC有生之年吧）',
-                    '物量冠军，相比之下GK是儿歌'
+                    '本人比较菜，只能在pad上clear（FC有生之年吧）',
+                    '物量冠军，相比之下GK是儿歌',
+                    '六兆年比这个简单一点（认真脸）'
                 ]
             },
             {
                 title: '1094 Note',
-                content: ['让我们记住这个鬼畜的EX物量', 'C/W曲尚且如此，听着感觉FIRE BIRD难度也不会低'],
+                content: ['是 Ringing Bloom 的 Note 数', '让我们记住这个鬼畜的EX物量', 'C/W曲尚且如此，听着感觉FIRE BIRD难度也不会低'],
+                hidden: false
+            },
+            {
+                title: '935 Note',
+                content: [
+                    '是 Fire Bird 的 Note 数',
+                    '还行（毕竟我都能FC）'
+                ],
                 hidden: false
             }
         ],
-        hasLimitedEdition: true
+        hasLimitedEdition: true,
+        rightExtension() {
+            return createElement(EncoreCard, {
+                title: '游戏封面',
+                image: '/img/FireBird.jpg',
+                secondaryImage: '/img/RingingBloom.jpg',
+                imageSize: 'massive'
+            })
+        }
     },
     {
         id: 10,
@@ -490,21 +513,21 @@ const siteConfig: Helper.SiteConfig = {
         }
     ]),
     getters: {
-        trackImageGetter (t) {
+        trackImageGetter(t) {
             return `/img/${Helper.capatialize(t.type!)}_${t.id}.jpg`
         },
-        limitedTrackImageGetter (t) {
+        limitedTrackImageGetter(t) {
             return `/img/${Helper.capatialize(t.type!)}_${t.id}_lim.jpg`
         },
-        memberImageGetter (m) {
+        memberImageGetter(m) {
             return `/img/member_${m.name.en.split(' ')[1].toLowerCase()}${
                 Helper.compose(Helper.randomGenerate, n => n ? n.toString() : '')(m.memberPicNum || 0)
-            }.jpg`
+                }.jpg`
         },
-        cvImageGetter (m) {
+        cvImageGetter(m) {
             return `/img/cv_${Helper.getLastLanguageAttribute(m.CVName).en.split(' ')[1].toLowerCase()}${
                 Helper.compose(Helper.randomGenerate, n => n ? n.toString() : '')(m.cvPicNum || 0)
-            }.jpg`
+                }.jpg`
         }
     },
     plugins: {
