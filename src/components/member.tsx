@@ -172,8 +172,8 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
             </div>
             
         ) : (<div></div>)
-        const WikiLink = (wikiName: string, generator: (s: string) => string) => ({wiki, as}: {wiki: string, as?: any}) => (
-            React.createElement(as||'p', null, <TargetLink link={generator(wiki)}>{wiki}({wikiName})</TargetLink>)
+        const WikiLink = (wikiName: string, generator: (s: string) => string) => ({ wiki, as }: { wiki: string, as?: any }) => (
+            React.createElement(as || 'p', {}, <TargetLink link={generator(wiki)}>{wiki}({wikiName})</TargetLink>)
         )
         const MoegirlLink = WikiLink('萌娘百科', s => `https://zh.moegirl.org/${s}`)
         const LazyImage = lazyImageOf(this.props.siteConfig.siteLogo)

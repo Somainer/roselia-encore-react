@@ -166,6 +166,19 @@ const siteConfig = Helper.makeSiteConfig({
                 }
             ],
             hasLimitedEdition: true
+        },
+        {
+            id: 4,
+            title: 'DRIVE US CRAZY',
+            track: ['DRIVE US CRAZY', 'HELL! or HELL?', 'DRIVE US CRAZY -instrumental-', 'HELL! or HELL? -instrumental-'],
+            releaseDate: '2020/01/22',
+            links: [
+                {
+                    description: 'BanG Dream!',
+                    link: 'https://bang-dream.com/discographies/1389'
+                }
+            ],
+            hasLimitedEdition: false
         }
     ]),
     members,

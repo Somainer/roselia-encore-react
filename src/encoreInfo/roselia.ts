@@ -392,8 +392,8 @@ const singles = Helper.makeTrackOf('single')([
     {
         id: 10,
         title: '約束',
-        track: ['約束', '?', '約束 -instrumental-', '? -instrumental-'],
-        releaseDate: '',
+        track: ['約束', '“UNIONS” Road', '約束 -instrumental-', '“UNIONS” Road -instrumental-'],
+        releaseDate: '2020/01/15',
         external: [
             {
                 title: '',
@@ -401,6 +401,10 @@ const singles = Helper.makeTrackOf('single')([
             }
         ],
         links: [
+            {
+                description: 'BanG Dream!',
+                link: 'https://bang-dream.com/discographies/1388'
+            },
             {
                 description: '谱面',
                 link: 'https://bangdream.ga/music/jp/200'

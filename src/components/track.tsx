@@ -118,13 +118,13 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
                 {track.releaseDate ? ((this.trackReleaseState && this.trackReleaseState < 0) ? (
                     <Popup trigger={
                         <Label as="a" color="violet" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}
-                        onClick={this.downloadICal} ></Label>
+                        onClick={this.downloadICal} />
                     } content={this.getContextText({
                         en: 'Add to system calendar',
                         cn: '添加到系统日历',
                         jp: 'システムカレンダーに追加'
                     })} />
-                ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}></Label>) : null}
+                ) : <Label color="green" size="large" icon={this.calendarIconClass} content={this.localReleaseDate}/>) : null}
                 {/* {JSON.stringify(this.props.match)} */}
                 {track.topExtension ? <track.topExtension {...this.props} /> : null}
             </div>
@@ -142,10 +142,10 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
                 {/* <IndentText>
                     {p.children}
                 </IndentText> */}
-                <Divider hidden></Divider>
+                <Divider hidden/>
             </div>
             
-        ) : (<div></div>)
+        ) : (<div/>)
         const LazyImage = lazyImageOf(this.props.siteConfig.siteLogo)
         
         return (
@@ -201,7 +201,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
     public render() {
         const track = this.track
         if (!this.hasValidTrack()) {
-            return <NotFound></NotFound>
+            return <NotFound/>
         }
         return (
             <TitledDocument title={track.title}>
