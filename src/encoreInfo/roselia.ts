@@ -409,7 +409,8 @@ const singles = Helper.makeTrackOf('single')([
                 description: '谱面',
                 link: 'https://bangdream.ga/music/jp/200'
             }
-        ]
+        ],
+        hasLimitedEdition: true
     }
 ])
 

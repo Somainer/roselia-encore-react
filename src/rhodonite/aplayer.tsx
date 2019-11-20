@@ -34,6 +34,7 @@ interface APlayerState {
 }
 
 export class RSAplayer extends React.Component<APlayerOptions, APlayerState> {
+    // @ts-ignore
     private node: HTMLElement | null
     public constructor(props: APlayerOptions) {
         super(props)
@@ -51,6 +52,7 @@ export class RSAplayer extends React.Component<APlayerOptions, APlayerState> {
                 this.setState({
                     instance: player
                 })
+                this.node = node;
             }
         }, [])
         return <div ref={createInstance}/>

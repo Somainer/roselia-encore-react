@@ -107,7 +107,14 @@ export function compose<T, U, V>(a: (t: T) => U, b: (u: U) => V) {
     return (t: T) => b(a(t))
 }
 
-export function randomGenerate(from: number, to?: number): number { // Generate random number from [from, to)
+/**  Generate random number from [from, to) 
+ * randomGenerate(to) => randomGenerate(0, to)
+ * @returns Number in [from, to)
+ * 
+ */
+// export function randomGenerate(to: number): number
+// export function randomGenerate(from: number,to: number): number
+export function randomGenerate(from: number, to?: number): number { 
     if (typeof to === 'undefined') return randomGenerate(0, from)
     return Math.floor(Math.random() * (to - from)) + from
 }
