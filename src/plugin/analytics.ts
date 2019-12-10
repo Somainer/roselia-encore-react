@@ -28,13 +28,14 @@ paq.push(['enableLinkTracking']);
 let currentUrl = location.href;
 
 window.addEventListener('popstate', ev => {
+    // remove all previously assigned custom variables, requires Matomo (formerly Piwik) 3.0.2
+    paq.push(['deleteCustomVariables', 'page']); 
+
     paq.push(['setReferrerUrl', currentUrl]);
     currentUrl = location.href;
     paq.push(['setCustomUrl', currentUrl]);
     paq.push(['setDocumentTitle', document.title]);
 
-    // remove all previously assigned custom variables, requires Matomo (formerly Piwik) 3.0.2
-    paq.push(['deleteCustomVariables', 'page']); 
     paq.push(['setGenerationTimeMs', 0]);
     paq.push(['trackPageView']);
 
