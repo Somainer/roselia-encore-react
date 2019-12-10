@@ -1,10 +1,8 @@
 // To make Typescript happy.
-type JointListType<T, U> = (T | U)[]
-
-interface RecursiveStringList extends JointListType<string, RecursiveStringList> { }
-
 interface PaqWindow extends Window {
-    _paq?: RecursiveStringList
+    _paq?: {
+        push(args: any[]): void
+    }
 }
 const globalWindow = window as PaqWindow;
 const paq = globalWindow._paq || [];
@@ -27,3 +25,22 @@ paq.push(['enableLinkTracking']);
     g.src = u + 'matomo.js';
     s.parentNode!.insertBefore(g, s);
 })();
+let currentUrl = location.href;
+
+window.addEventListener('popstate', ev => {
+    paq.push(['setReferrerUrl', currentUrl]);
+    currentUrl = location.href;
+    paq.push(['setCustomUrl', currentUrl]);
+    paq.push(['setDocumentTitle', document.title]);
+
+    // remove all previously assigned custom variables, requires Matomo (formerly Piwik) 3.0.2
+    paq.push(['deleteCustomVariables', 'page']); 
+    paq.push(['setGenerationTimeMs', 0]);
+    paq.push(['trackPageView']);
+
+    // make Matomo aware of newly added content
+    const content = document.body;
+    paq.push(['MediaAnalytics::scanForMedia', content]);
+    paq.push(['trackContentImpressionsWithinNode', content]);
+    paq.push(['enableLinkTracking']);
+})
