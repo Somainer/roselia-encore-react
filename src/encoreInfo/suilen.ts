@@ -7,14 +7,14 @@ const members = Helper.makeMembers([
             cn: "和奏瑞依",
             en: "Wakana Rei"
         },
-        birthday: '',
+        birthday: '1-13',
         role: "Vo/Ba LAYER",
         CVName: {
             jp: "Raychell",
             cn: "Raychell",
             en: "Raychell"
         },
-        horoscope: '',
+        horoscope: '摩羯',
         encoreColor: "#CD0A10"
     },
     {
@@ -28,9 +28,9 @@ const members = Helper.makeMembers([
             cn: "小原莉子",
             jp: "小原莉子"
         },
-        birthday: "",
+        birthday: "7-17",
         role: "Gt LOCK",
-        horoscope: "",
+        horoscope: "巨蟹",
         encoreColor: "#BCFF64"
     },
     {
@@ -39,9 +39,9 @@ const members = Helper.makeMembers([
             "cn": "佐藤益木",
             "jp": "佐藤ますき"
         },
-        birthday: "",
+        birthday: "5-12",
         role: "Dr MASKING",
-        horoscope: "",
+        horoscope: "金牛",
         encoreColor: "#E1BA39",
         CVName: {
             en: "Natsume",
@@ -56,8 +56,8 @@ const members = Helper.makeMembers([
             cn: "PAREO",
             jp: "鳰原れおな"
         },
-        birthday: "",
-        horoscope: "",
+        birthday: "3-25",
+        horoscope: "白羊",
         role: 'Key PAREO',
         encoreColor: "#FF99CC",
         CVName: {
@@ -79,8 +79,8 @@ const members = Helper.makeMembers([
             cn: "CHU2",
             jp: "玉出ちゆ"
         },
-        birthday: "",
-        horoscope: "",
+        birthday: "12-7",
+        horoscope: "射手",
         role: 'Dj CHU²',
         encoreColor: "#33CCFF",
         CVName: {
@@ -150,6 +150,10 @@ const siteConfig = Helper.makeSiteConfig({
                     link: 'https://bang-dream.com/discographies/962'
                 },
                 {
+                    description: 'Apple Music',
+                    link: 'https://music.apple.com/cn/album/invincible-fighter-single/1465072434'
+                },
+                {
                     description: 'NetEase',
                     link: 'https://music.163.com/album?id=79877573'
                 }
@@ -176,6 +180,14 @@ const siteConfig = Helper.makeSiteConfig({
                 {
                     description: 'BanG Dream!',
                     link: 'https://bang-dream.com/discographies/1389'
+                },
+                {
+                    description: 'Apple Music',
+                    link: 'https://music.apple.com/cn/album/drive-us-crazy-single/1492220767'
+                },
+                {
+                    description: 'NetEase',
+                    link: 'https://music.163.com/album?id=85117423'
                 }
             ],
             hasLimitedEdition: true

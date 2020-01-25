@@ -332,6 +332,14 @@ const singles = Helper.makeTrackOf('single')([
                 link: 'https://bang-dream.com/discographies/963'
             },
             {
+                description: 'Apple Music',
+                link: 'https://music.apple.com/cn/album/1471487514'
+            },
+            {
+                description: 'NetEase',
+                link: 'https://music.163.com/album?id=80584824'
+            },
+            {
                 description: '萌娘百科（FIRE BIRD）',
                 link: 'https://zh.moegirl.org/FIRE_BIRD'
             },
@@ -404,6 +412,14 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: 'BanG Dream!',
                 link: 'https://bang-dream.com/discographies/1388'
+            },
+            {
+                description: 'Apple Music',
+                link: 'https://music.apple.com/cn/album/1492221949'
+            },
+            {
+                description: 'NetEase',
+                link: 'https://music.163.com/album?id=85003327'
             },
             {
                 description: '谱面',
@@ -572,7 +588,7 @@ const siteConfig: Helper.SiteConfig = {
             name: 'BanG Dream! 3rd Season',
             coverImage: '/img/bangumi/bd3rd.jpg',
             releaseDate: '2019/10/1',
-            link: '',
+            link: 'https://www.bilibili.com/bangumi/media/md28224078',
             meta: ''
         }
     ],
