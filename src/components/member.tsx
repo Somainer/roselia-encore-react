@@ -25,7 +25,6 @@ const notFoundMember: Protocol.MemberInfo = {
     },
     role: 'NotFound',
     birthday: '',
-    horoscope: '',
     encoreColor: '',
 }
 
@@ -185,6 +184,9 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                         <AttrWithTitle header={{cn: "生日", jp:"誕生日", en: "Birthday"}}>
                             {member.birthday}
                         </AttrWithTitle>
+                        {member.zodiac && (<AttrWithTitle header={{ cn: '星座', jp: '星座', en: 'Zodiac' }}>
+                            { this.getContextText(Protocol.ZodiacDict[member.zodiac]) }
+                        </AttrWithTitle>)}
                         <AttrWithTitle when={!!member.bloodType} header={{cn: "血型", jp:"血液型", en: "Blood Type"}}>
                             {member.bloodType}
                         </AttrWithTitle>

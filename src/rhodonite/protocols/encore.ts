@@ -22,7 +22,7 @@ export interface MemberInfo {
     role?: string
     CVName: MultiLanguageAttribute | MultiLanguageAttribute[] // 可怜的Roselia
     bloodType?: BloodType
-    horoscope: string
+    zodiac?: Zodiac
     encoreColor: string
     external?: ExternalText[]
     [attrs: string]: any
@@ -80,6 +80,7 @@ export interface BannerImageConfig {
     background?: string
     foreground?: string,
     gradient?: string
+    blurBackground?: boolean
 }
 
 export interface SiteImageGetter {
@@ -136,3 +137,21 @@ export interface SiteOverallConfig {
     }[],
     defaultSite: SiteConfig
 }
+
+
+export const ZodiacDict = {
+    'aries': { 'cn': '白羊座', 'en': 'Aries', 'jp': '牡羊座' },
+    'taurus': { 'cn': '金牛座', 'en': 'Taurus', 'jp': '牡牛座' },
+    'gemini': { 'cn': '双子座', 'en': 'Gemini', 'jp': '双子座' },
+    'cancer': { 'cn': '巨蟹座', 'en': 'Cancer', 'jp': '蟹座' },
+    'leo': { 'cn': '狮子座', 'en': 'Leo', 'jp': '狮子座' },
+    'virgo': { 'cn': '处女座', 'en': 'Virgo', 'jp': '乙女座' },
+    'libra': { 'cn': '天秤座', 'en': 'Libra', 'jp': '天秤座' },
+    'scorpio': { 'cn': '天蝎座', 'en': 'Scorpio', 'jp': '蝎座' },
+    'sagittarius': { 'cn': '射手座', 'en': 'Sagittarius', 'jp': '射手座' },
+    'capricorn': { 'cn': '摩羯座', 'en': 'Capricorn', 'jp': '山羊座' },
+    'aquarius': { 'cn': '水平座', 'en': 'Aquarius', 'jp': '水瓶座' },
+    'pisces': { 'cn': '双鱼座', 'en': 'Pisces', 'jp': '鱼座' }
+}
+
+export type Zodiac = keyof typeof ZodiacDict

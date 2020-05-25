@@ -19,7 +19,7 @@ const members = Helper.makeMembers([
             en: "Aiba Aina"
         },
         bloodType: 'A',
-        horoscope: "天蝎",
+        zodiac: 'scorpio',
         encoreColor: "#890f87", //"#c67cb5",
         cvPicNum: 2,
         external: [
@@ -44,8 +44,8 @@ const members = Helper.makeMembers([
         },
         birthday: "3-20",
         role: "Gt",
-        bloodType: "AB",
-        horoscope: "双鱼",
+        bloodType: 'AB',
+        zodiac: "pisces",
         encoreColor: "#00aabc",
         cvPicNum: 2,
         memberPicNum: 3
@@ -59,7 +59,7 @@ const members = Helper.makeMembers([
         birthday: "8-25",
         role: "Ba",
         bloodType: "O",
-        horoscope: "处女",
+        zodiac: "virgo",
         encoreColor: "#dd2200",
         CVName: [
             {
@@ -84,7 +84,7 @@ const members = Helper.makeMembers([
         birthday: "7-3",
         role: "Dr",
         bloodType: "B",
-        horoscope: "巨蟹",
+        zodiac: 'cancer',
         encoreColor: "#dd0087",
         CVName: {
             en: "Sakuragawa Megu",
@@ -102,7 +102,7 @@ const members = Helper.makeMembers([
         birthday: "10-17",
         role: "Key",
         bloodType: "O",
-        horoscope: "天秤",
+        zodiac: 'libra',
         encoreColor: "#bbbbbb",
         avatar: 'https://img.moegirl.org/common/thumb/8/80/Rinko_icon.png/60px-Rinko_icon.png',
         CVName: [
@@ -455,6 +455,19 @@ const albums = Helper.makeTrackOf('album')([
             title: "P.S.",
             content: ["嘛，这个好像是买Blu-ray付生産限定盤更有意义呢，通常版的东西就少得可怜了，不过就当单曲买了也不亏（3200+JPY）"]
         }]
+    },
+    {
+        id: 2,
+        title: 'Wahl',
+        track: ['R', 'BRAVE JEWEL', 'Determination Symphony', 'FIRE BIRD', 'Safe and Sound', 'Avant-garde HISTORY', 'Break your desire', 'Re:birth day', 'Neo-Aspect', '約束', '“UNIONS” Road', 'Song I am.'],
+        releaseDate: '2020-7-15',
+        links: [
+            {
+                description: 'BanG Dream',
+                link: 'https://bang-dream.com/discographies/1692'
+            }
+        ],
+        hasLimitedEdition: true
     }
 ])
 
@@ -470,7 +483,8 @@ const siteConfig: Helper.SiteConfig = {
     playerUrl: '' && 'https://music.163.com/outchain/player?type=0&id=1999324469&auto=0&height=430',
     bannerImage: {
         foreground: '/img/roselia characters.png',
-        background: '/img/roselia-bg.png'
+        background: '/img/roselia-bg.png',
+        blurBackground: false
     },
     externalTrackLists: Helper.makeExternalTrackList([
         {

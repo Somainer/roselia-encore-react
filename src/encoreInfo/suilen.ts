@@ -14,7 +14,7 @@ const members = Helper.makeMembers([
             cn: "Raychell",
             en: "Raychell"
         },
-        horoscope: '摩羯',
+        zodiac: 'capricorn',
         encoreColor: "#CD0A10"
     },
     {
@@ -30,7 +30,7 @@ const members = Helper.makeMembers([
         },
         birthday: "7-17",
         role: "Gt LOCK",
-        horoscope: "巨蟹",
+        zodiac: 'cancer',
         encoreColor: "#BCFF64"
     },
     {
@@ -41,7 +41,7 @@ const members = Helper.makeMembers([
         },
         birthday: "5-12",
         role: "Dr MASKING",
-        horoscope: "金牛",
+        zodiac: 'taurus',
         encoreColor: "#E1BA39",
         CVName: {
             en: "Natsume",
@@ -57,7 +57,7 @@ const members = Helper.makeMembers([
             jp: "鳰原れおな"
         },
         birthday: "3-25",
-        horoscope: "白羊",
+        zodiac: 'aries',
         role: 'Key PAREO',
         encoreColor: "#FF99CC",
         CVName: {
@@ -80,7 +80,7 @@ const members = Helper.makeMembers([
             jp: "玉出ちゆ"
         },
         birthday: "12-7",
-        horoscope: "射手",
+        zodiac: 'sagittarius',
         role: 'Dj CHU²',
         encoreColor: "#33CCFF",
         CVName: {

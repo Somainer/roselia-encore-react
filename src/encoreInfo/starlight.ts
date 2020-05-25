@@ -15,7 +15,7 @@ const members = Helper.makeMembers([
             cn: "小山百代",
             en: "Koyama Momoyo"
         },
-        horoscope: "天秤",
+        zodiac: 'libra',
         encoreColor: "#FB5458",
     },
     {
@@ -31,7 +31,7 @@ const members = Helper.makeMembers([
         },
         birthday: "1-8",
         role: "统治スタリラ的女人",
-        horoscope: "摩羯",
+        zodiac: 'capricorn',
         encoreColor: "#6292E9"
     },
     {
@@ -42,7 +42,7 @@ const members = Helper.makeMembers([
         },
         birthday: "7-24",
         role: "口合口合",
-        horoscope: "狮子",
+        zodiac: 'leo',
         encoreColor: "#CBC6CC",
         CVName: {
             en: "Tomita Maho",
@@ -70,7 +70,7 @@ const members = Helper.makeMembers([
             jp: "星見純那"
         },
         birthday: "10-1",
-        horoscope: "天秤",
+        zodiac: 'libra',
         encoreColor: "#95CAEE",
         CVName: {
             en: "Sato Hinata",
@@ -86,7 +86,7 @@ const members = Helper.makeMembers([
         },
         birthday: "5-4",
         role: "闹钟",
-        horoscope: "金牛",
+        zodiac: 'taurus',
         encoreColor: "#61BF99",
         CVName: {
             en: "Iwata Haruki",
@@ -109,7 +109,7 @@ const members = Helper.makeMembers([
         },
         birthday: "7-12",
         role: "bananice",
-        horoscope: "巨蟹",
+        zodiac: 'cancer',
         encoreColor: "#FDD162",
         CVName: {
             en: "Koizumi Moeka",
@@ -125,7 +125,7 @@ const members = Helper.makeMembers([
         },
         birthday: "8-1",
         role: "Oui",
-        horoscope: "狮子",
+        zodiac: 'leo',
         encoreColor: "#FE9952",
         CVName: {
             jp: "相羽あいな",
@@ -140,7 +140,7 @@ const members = Helper.makeMembers([
             jp: "石動双葉"
         },
         birthday: "4-17",
-        horoscope: "白羊",
+        zodiac: 'aries',
         encoreColor: "#8C67AA",
         CVName: {
             jp: "生田輝",
@@ -155,7 +155,7 @@ const members = Helper.makeMembers([
             jp: "花柳香子"
         },
         birthday: "3-3",
-        horoscope: "双鱼",
+        zodiac: 'pisces',
         encoreColor: "#E08696",
         CVName: {
             jp: "伊藤彩沙",

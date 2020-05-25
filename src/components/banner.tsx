@@ -13,11 +13,13 @@ export class BannerImage extends React.Component<BannerImageConfig> {
         width: '100%',
     }
     private get backGroundStyle(): React.CSSProperties {
+        const shouldBlurBackground =
+            typeof this.props.blurBackground === 'undefined' ? !!this.props.foreground : this.props.blurBackground;
         return {
             ...this.fillHeight,
             backgroundImage: this.gradient ? `${this.gradient}, url('${this.props.background}')` : `url('${this.props.background}')`,
             backgroundSize: 'cover',
-            ...(this.props.foreground ? {
+            ...(shouldBlurBackground ? {
                 filter: 'blur(25px) saturate(120%)',
                 animation: 'blur-clear 1s ease-in-out',
                 animationDelay: '1s',
