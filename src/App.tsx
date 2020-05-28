@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 // import { Segment } from 'semantic-ui-react'
-import 'semantic-ui/dist/semantic.css'
+import 'semantic-ui-css/semantic.min.css'
 
 // import logo from './logo.svg';
 // import {TitledDocument} from './rhodonite/component'

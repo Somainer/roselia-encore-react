@@ -435,7 +435,7 @@ const albums = Helper.makeTrackOf('album')([
         id: 1,
         title: "Anfang",
         track: ["Neo-Aspect", "BLACK SHOUT", "Opera of the wasteland", "陽だまりロードナイト", "ONENESS", "Re:birth day", "Legendary", "－HEROIC ADVENT－", "Determination Symphony", "熱色スターマイン", "軌跡", "LOUDER"],
-        releaseDate: "2018-5-2",
+        releaseDate: "2018/5/2",
         links: [
             {
                 description: "BanG Dream",
@@ -460,7 +460,7 @@ const albums = Helper.makeTrackOf('album')([
         id: 2,
         title: 'Wahl',
         track: ['R', 'BRAVE JEWEL', 'Determination Symphony', 'FIRE BIRD', 'Safe and Sound', 'Avant-garde HISTORY', 'Break your desire', 'Re:birth day', 'Neo-Aspect', '約束', '“UNIONS” Road', 'Song I am.'],
-        releaseDate: '2020-7-15',
+        releaseDate: '2020/7/15',
         links: [
             {
                 description: 'BanG Dream',

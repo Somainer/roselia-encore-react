@@ -5,7 +5,7 @@ interface PaqWindow extends Window {
     }
 }
 const globalWindow = window as PaqWindow;
-const paq = globalWindow._paq || [];
+const paq = globalWindow._paq || [] as any[];
 globalWindow._paq = paq;
 /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
 // Analytic codes
@@ -28,7 +28,7 @@ paq.push(['enableLinkTracking']);
 let currentUrl = location.href;
 
 window.addEventListener('popstate', ev => {
-    const p = globalWindow._paq || [];
+    const p = globalWindow._paq || [] as any[];
     // remove all previously assigned custom variables, requires Matomo (formerly Piwik) 3.0.2
     p.push(['deleteCustomVariables', 'page']); 
 
