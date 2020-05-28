@@ -170,7 +170,7 @@ const singles = Helper.makeTrackOf('single')([
         id: 1,
         title: "プロローグ -Star Divine-",
         track: ["Star Divine", "舞台少女心得", "願いは光になって", "Star Divine［Instrumental］", "舞台少女心得［Instrumental］", "願いは光になって［Instrumental］"],
-        releaseDate: "2017-9-20",
+        releaseDate: "2017/9/20",
         links: [
             {
                 description: "Revue Starlight",
@@ -192,7 +192,7 @@ const singles = Helper.makeTrackOf('single')([
         displayId: '限定',
         title: "プリンシパル -Fancy You-",
         track: ["Fancy You", "GANG☆STAR", "情熱の目覚めるとき", "Fancy You［Instrumental］", "GANG☆STAR［Instrumental］", "情熱の目覚めるとき［Instrumental］"],
-        releaseDate: "2017-9-22",
+        releaseDate: "2017/9/22",
         links: [
             {
                 description: "Revue Starlight",
@@ -244,7 +244,7 @@ const singles = Helper.makeTrackOf('single')([
         displayId: 'ED',
         title: "Fly Me to the Star",
         track: ["Fly Me to the Star", "よろしく九九組", "ロマンティッククルージン", "Fly Me to the Star［Instrumental］", "よろしく九九組［Instrumental］", "ロマンティッククルージン［Instrumental］"],
-        releaseDate: "2018-8-1",
+        releaseDate: "2018/8/1",
         links: [
             {
                 description: "Revue Starlight",
@@ -261,7 +261,7 @@ const singles = Helper.makeTrackOf('single')([
         displayId: "舞台1st",
         title: "99 ILLUSION！",
         track: ["99 ILLUSION！", "Green Dazzling Light", "99 ILLUSION！ (Instrumental)", "Green Dazzling Light (Instrumental)"],
-        releaseDate: "2018-10-10",
+        releaseDate: "2018/10/10",
         links: [
             {
                 description: "Revue Starlight",
@@ -286,6 +286,22 @@ const singles = Helper.makeTrackOf('single')([
             {
                 description: 'NetEase',
                 link: 'https://music.163.com/album?id=75799869'
+            }
+        ]
+    },
+    {
+        id: 7,
+        title: 'Star Parade',
+        track: ['Star Parade', '純情アンクラシファイド', 'Lessonナweek!!', 'Star Parade［Instrumental］', '純情アンクラシファイド［Instrumental］', 'Lessonナweek!!［Instrumental］'],
+        releaseDate: '2020/2/19',
+        links: [
+            {
+                description: 'Revue Starlight',
+                link: 'https://revuestarlight.com/music/7thsingle/'
+            },
+            {
+                description: 'NetEase',
+                link: 'https://music.163.com/album?id=86029990'
             }
         ]
     },

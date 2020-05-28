@@ -20,11 +20,16 @@ export interface MemberInfo {
     name: MultiLanguageAttribute
     birthday: string
     role?: string
+    // CVName can be a list if the voice actor of this character has been changed.
     CVName: MultiLanguageAttribute | MultiLanguageAttribute[] // 可怜的Roselia
     bloodType?: BloodType
     zodiac?: Zodiac
+    // The main visual color of this character.
     encoreColor: string
+    // Your additional texts.
     external?: ExternalText[]
+    // The additional properties you wanted to add.
+    // These attribute could be used via getters.
     [attrs: string]: any
 }
 
@@ -35,6 +40,12 @@ interface LinkInfo {
 
 interface ExternalText { // 一些私货
     title: string
+    /**
+     * The behavior depends on the type of content.
+     * * string: Display a single text.
+     * * string[]: Display a list.
+     * * Select considering the language.
+     */
     content: string | string[] | MultiLanguageAttribute
     hidden?: boolean
 }
@@ -43,6 +54,7 @@ export type TrackType = 'single' | 'album' | 'cover' | 'ost'
 
 export interface TrackInfo {
     id: number
+    // If displayId is specified, display this instead of id.
     displayId?: string
     type?: TrackType
     title: string
@@ -50,6 +62,7 @@ export interface TrackInfo {
     releaseDate: string
     links?: LinkInfo[]
     external?: ExternalText[],
+    // If this tract has limited edition, the limited picture will display on hover.
     hasLimitedEdition?: boolean
     [attrs: string]: any
 }
@@ -78,15 +91,20 @@ interface VideoDetail {
 
 export interface BannerImageConfig {
     background?: string
-    foreground?: string,
+    foreground?: string
     gradient?: string
     blurBackground?: boolean
 }
 
 export interface SiteImageGetter {
+    // Determine how to get the jacket of a track.
     trackImageGetter (t: TrackInfo): string
-    limitedTrackImageGetter (t: TrackInfo): string
-    memberImageGetter (m: MemberInfo): string
+    // Determine how to get the jacket of the limited version of track.
+    // Will only be called when `hasLimitedEdition` is true.
+    limitedTrackImageGetter(t: TrackInfo): string
+    // Determine how to get the image of the character.
+    memberImageGetter(m: MemberInfo): string
+    // Determine how to get the image of the voice actor of the character.
     cvImageGetter (m: MemberInfo): string
 }
 
@@ -109,23 +127,32 @@ export interface BangumiItem {
 }
 
 export interface SiteConfig {
-    title: string,
+    // The title of this site.
+    title: string
+    // The name of the configuration of this site, use it as an identifier.
     configName: string
     playerUrl?: string
+    // The logo of this site.
     siteLogo: string
     siteFavicon: string
+    // Should we spin the logo like Revue Starlight.
     logoSpin?: boolean
+    // Members in this band.
     members: MemberInfo[]
+    // Single tracks.
     singles: TrackInfo[]
+    // Albums
     albums?: TrackInfo[]
+    // Cover vesion songs.
     covers?: TrackInfo[]
+    // Recommand videos
     videos?: RecommandVideoAdapter[]
     themeColor: string
-    bannerImage: BannerImageConfig,
-    getters: SiteImageGetter,
-    plugins: SitePlugins,
+    bannerImage: BannerImageConfig
+    getters: SiteImageGetter
+    plugins: SitePlugins
     externalTrackLists?: ExternalTrackList[]
-    bangumiList?: BangumiItem[],
+    bangumiList?: BangumiItem[]
     externalLinks?: ExternalLinks
     [attr: string]: any
 }

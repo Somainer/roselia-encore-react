@@ -59,7 +59,7 @@ export class Index extends React.Component<IndexProps, {}> {
                     <p className="App-intro">
                     <p>Made with love by Somainer</p>
                     </p>
-                    <p>为了演示可扩展性，目前这里有三个预制配置，阁下（DD）想要看哪一个？</p>
+                    {/* <p>为了演示可扩展性，目前这里有三个预制配置，阁下（DD）想要看哪一个？</p> */}
                     <Button.Group>
                     <Link to="/"><Button color={site.configName === 'roselia' ? 'violet' : undefined}>Roselia</Button></Link>
                     <Button.Or />

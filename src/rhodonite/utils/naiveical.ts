@@ -84,10 +84,8 @@ END:VEVENT
 
     public addMemberBirthday(member: MemberInfo, language: SupportedLanguages, url: string) {
         const getLanguage = (mlt: MultiLanguageAttribute | MultiLanguageAttribute[]) => Helpers.getLanguageAttribute(Helpers.getLastLanguageAttribute(mlt), language)
-        const [month, date] = member.birthday.split(/(?:-|\/)/)
-        const dt = new Date
-        dt.setMonth(parseInt(month, 10) - 1)
-        dt.setDate(parseInt(date, 10))
+        
+        const dt = Helpers.tryParseDateWithoutYear(member.birthday)
         this.addEvent({
             summary: getLanguage(member.name) + getLanguage({
                 cn: '的生日',

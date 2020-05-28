@@ -182,7 +182,7 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                     <Grid.Row>
                     <Grid.Column width={8}>
                         <AttrWithTitle header={{cn: "生日", jp:"誕生日", en: "Birthday"}}>
-                            {member.birthday}
+                            {Helpers.formatDateWithoutYear(Helpers.tryParseDateWithoutYear(member.birthday), this.props.language)}
                         </AttrWithTitle>
                         {member.zodiac && (<AttrWithTitle header={{ cn: '星座', jp: '星座', en: 'Zodiac' }}>
                             { this.getContextText(Protocol.ZodiacDict[member.zodiac]) }

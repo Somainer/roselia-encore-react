@@ -84,7 +84,7 @@ abstract class TrackPage extends React.Component<TrackPageProps> {
 
     private get localReleaseDate () {
         try {
-            return (new Date(this.track.releaseDate)).toLocaleDateString()
+            return (new Date(this.track.releaseDate)).toLocaleDateString(this.props.language)
         } catch {
             return this.track.releaseDate
         }

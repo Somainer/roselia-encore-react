@@ -77,9 +77,37 @@ export function sameDate (originDate?: Date, exact: boolean=false) {
     }
 }
 
+export function tryParseDateWithoutYear(date: Date | string) {
+    if (date instanceof Date) {
+        return date
+    }
+    
+    // If date matches mm-dd or mm/dd.
+    const parts = date.match(/(\d+)[\/\-](\d+)/)
+    if (parts) {
+        const month = parseInt(parts[1], 10)
+        const day = parseInt(parts[2], 10)
+        const dummyDate = new Date()
+
+        // January starts from 0, so substract one.
+        dummyDate.setMonth(month - 1)
+        dummyDate.setDate(day)
+        return dummyDate
+    }
+
+    return new Date(date)
+}
+
+export function formatDateWithoutYear(date: Date, locale?: string) {
+    return date.toLocaleString(locale, {
+        month: 'long',
+        day: 'numeric'
+    })
+}
+
 export function dummySameDate(origin: Date|string, target: string | Date, exact: boolean=false) {
     try {
-        return sameDate(new Date(origin), exact)(target)
+        return sameDate(new Date(origin), exact)(tryParseDateWithoutYear(target))
     } catch {
         return false
     }
