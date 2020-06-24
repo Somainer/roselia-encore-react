@@ -8,6 +8,7 @@ import {lazyImageOf} from '../rhodonite/lazyimage'
 import {LazyComonent} from '../rhodonite/lazycomponent'
 import {TargetLink} from '../rhodonite/smartLink'
 import { selectByLuminance } from 'src/rhodonite/utils/colorUtils';
+import { gradientSingleColor } from '../rhodonite/utils/gradients'
 
 type SemanticColumnNum = 1 | 3 | 4
 
@@ -24,6 +25,7 @@ interface SectionCard {
     image: string,
     secondaryImage?: string,
     color?: string,
+    gradient?: boolean
     link?: string,
     meta?: string,
     description?: string
@@ -44,7 +46,8 @@ export const EncoreCard = (sc: SectionCard) => {
     return (
     <Grid.Column key={sc.title}>
         <div className="thumbnail">
-            <Card link {...linkProps} fluid style={{background: sc.color}} onClick={sc.onClick}>
+            <Card link {...linkProps} fluid
+                    style={{ background: sc.gradient ? gradientSingleColor(sc.color!, 'to right') : sc.color }} onClick={sc.onClick}>
                 {sc.secondaryImage ? (
                     <Reveal animated='move'>
                         <Reveal.Content visible>
@@ -110,6 +113,7 @@ export const memberSection = (si: SiteConfig, language: SupportedLanguages) => {
             image: getters.memberImageGetter(m),
             secondaryImage: getters.cvImageGetter(m),
             color: m.encoreColor,
+            gradient: true,
             meta: m.role,
             description: `CV:${languageGetter(mergeLanguageAttribute(m.CVName))}`,
             link: `member/${getLast(m.name.en.split(' '))}/`,
@@ -222,13 +226,15 @@ export const linkSection = (gs: ExternalLinks, language: SupportedLanguages) => 
             link: 'mailto:yukina@roselia.moe',
             image: '',
             color: 'linear-gradient(135deg, rgb(114, 82, 201) 15%, #9CD4EA 85%)',
+            gradient: false,
             isDark: true
         }].concat(gs.map(t => ({
             title: t.description,
             link: t.link,
             image: '',
             color: '',
-            isDark: false
+            isDark: false,
+            gradient: false
         })))
     }}></EncoreSection>
 )

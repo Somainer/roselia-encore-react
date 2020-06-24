@@ -21,6 +21,7 @@
     "file-name-casing": false,
     "jsx-self-close": false,
     "only-arrow-functions": false,
-    "max-classes-per-file": false
+    "max-classes-per-file": false,
+    "no-bitwise": false
   }
 }

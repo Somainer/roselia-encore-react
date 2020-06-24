@@ -11,6 +11,8 @@ import { NotFound } from './notfound';
 import {lazyImageOf} from '../rhodonite/lazyimage'
 import { TargetLink } from 'src/rhodonite/smartLink';
 import { NaiveRoseliaiCal } from 'src/rhodonite/utils/naiveical';
+import { gradientSingleColor } from '../rhodonite/utils/gradients'
+import { selectByLuminance } from '../rhodonite/utils/colorUtils'
 
 const notFoundMember: Protocol.MemberInfo = {
     name: {
@@ -120,8 +122,8 @@ export class MemberPage extends React.PureComponent<MemberPageProps> {
                         })}
                         onClick={this.downloadICal}
                         style={{
-                            background: member.encoreColor,
-                            color: 'white'
+                            background: gradientSingleColor(member.encoreColor, { degree: -114 }, false),
+                            color: selectByLuminance(member.encoreColor, 'black', 'white', 'white')
                         }}></Label>
                     } content={this.getContextText({
                         en: 'Add to system calendar',
