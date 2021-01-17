@@ -427,6 +427,19 @@ const singles = Helper.makeTrackOf('single')([
             }
         ],
         hasLimitedEdition: true
+    },
+    {
+        id: 11,
+        title: 'ZEAL of proud',
+        track: ['ZEAL of proud', 'Blessing Chord', 'ZEAL of proud -instrumental-', 'Blessing Chord -instrumental-'],
+        releaseDate: '2021/01/20',
+        links: [
+            {
+                description: 'BanG Dream!',
+                link: 'https://bang-dream.com/discographies/2298'
+            }
+        ],
+        hasLimitedEdition: true
     }
 ])
 
